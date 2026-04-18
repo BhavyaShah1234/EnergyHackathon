@@ -74,6 +74,40 @@ sources:
   # once a token is issued from mis.ercot.com. Until then, ERCOT LMP/DAM/fuel-mix
   # is intentionally absent rather than half-wired to an unofficial dashboard URL.
 
+  # --- Geospatial / static datasets (Collide sub-A: siting) ---
+
+  blm_sma:
+    description: BLM Surface Management Agency — federal and state land ownership parcels for AZ/NM/TX
+    endpoint: https://gis.blm.gov/arcgis/rest/services/lands/BLM_Natl_SMA_Cached_without_Outline/MapServer/0/query
+    cadence_seconds: 86400       # daily — static data, check once a day
+    freshness_sla_hours: 168     # weekly tolerance for static data
+    natural_key: [object_id]
+    region: SW
+
+  hifld_fiber:
+    description: Fiber infrastructure proxy via FCC BDC — FTTP availability at census-block level for AZ/NM/TX
+    endpoint: https://broadbandmap.fcc.gov/api/public/map/listAvailability/fixed/query
+    cadence_seconds: 86400
+    freshness_sla_hours: 168
+    natural_key: [block_geoid, provider_id]
+    region: SW
+
+  nhd_waterbody:
+    description: USGS NHD waterbody polygons (lakes, reservoirs) for cooling water proximity analysis
+    endpoint: https://hydro.nationalmap.gov/arcgis/rest/services/nhd/MapServer/10/query
+    cadence_seconds: 86400
+    freshness_sla_hours: 168
+    natural_key: [object_id]
+    region: SW
+
+  fema_floodplain:
+    description: FEMA NFHL 100-year/500-year flood hazard zones for environmental risk screening
+    endpoint: https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28/query
+    cadence_seconds: 86400
+    freshness_sla_hours: 168
+    natural_key: [object_id]
+    region: SW
+
   noaa_phoenix:
     description: NOAA NWS gridpoint forecast for Phoenix (PSR/158,56) — temperature, windSpeed, visibility for sandstorm trigger
     endpoint: https://api.weather.gov/gridpoints/PSR/158,56/forecast/hourly
@@ -100,6 +134,10 @@ http:
     api.eia.gov: 4
     oasis.caiso.com: 1
     api.weather.gov: 2
+    gis.blm.gov: 1
+    broadbandmap.fcc.gov: 1
+    hydro.nationalmap.gov: 1
+    hazards.fema.gov: 1
 
 # Retention for raw audit trail
 retention:

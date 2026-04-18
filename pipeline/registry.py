@@ -76,6 +76,31 @@ REGISTRY: dict[str, DatasetEntry] = {
         join_keys=["timestamp_utc"],
         description="KPHX observations (ground truth temp/visibility/wind)",
     ),
+    # --- Geospatial / static datasets (Collide sub-A: siting) ---
+    "blm_sma": DatasetEntry(
+        source="blm_sma", dataset="blm_sma",
+        module="pipeline.sources.blm_glo", class_name="BLMSMAIngestor",
+        join_keys=["object_id"],
+        description="BLM Surface Management Agency — federal/state land ownership (AZ/NM/TX)",
+    ),
+    "hifld_fiber": DatasetEntry(
+        source="hifld_fiber", dataset="hifld_fiber",
+        module="pipeline.sources.hifld_fiber", class_name="HIFLDFiberIngestor",
+        join_keys=["block_geoid", "provider_id"],
+        description="FTTP fiber availability at census-block level via FCC BDC (AZ/NM/TX)",
+    ),
+    "nhd_waterbody": DatasetEntry(
+        source="nhd_waterbody", dataset="nhd_waterbody",
+        module="pipeline.sources.epa_nhd", class_name="NHDWaterbodyIngestor",
+        join_keys=["object_id"],
+        description="USGS NHD waterbody polygons — cooling water proximity (AZ/NM/TX)",
+    ),
+    "fema_floodplain": DatasetEntry(
+        source="fema_floodplain", dataset="fema_floodplain",
+        module="pipeline.sources.epa_nhd", class_name="FEMAFloodplainIngestor",
+        join_keys=["object_id"],
+        description="FEMA NFHL flood hazard zones — 100yr/500yr floodplain (AZ/NM/TX)",
+    ),
 }
 
 

@@ -101,6 +101,77 @@ NOAA_OBS_SCHEMA = pa.DataFrameSchema(
 )
 
 
+# --- Geospatial / static datasets (Collide sub-A) ---
+
+BLM_SMA_SCHEMA = pa.DataFrameSchema(
+    {
+        "object_id": pa.Column(float, nullable=True),
+        "sma_code": pa.Column(str, nullable=True),
+        "admin_agency": pa.Column(str, nullable=True),
+        "admin_state": pa.Column(str, pa.Check.isin(["AZ", "NM", "TX"]), nullable=True),
+        "admin_name": pa.Column(str, nullable=True),
+        "acreage": pa.Column(float, pa.Check.ge(0), nullable=True),
+        "shape_area_sq_deg": pa.Column(float, nullable=True),
+        "geometry_geojson": pa.Column(str, nullable=True),
+        **_PROVENANCE,
+    },
+    strict=True,
+    coerce=True,
+)
+
+
+HIFLD_FIBER_SCHEMA = pa.DataFrameSchema(
+    {
+        "frn": pa.Column(str, nullable=True),
+        "provider_id": pa.Column(str, nullable=True),
+        "brand_name": pa.Column(str, nullable=True),
+        "state_fips": pa.Column(str, pa.Check.isin(["04", "35", "48"]), nullable=True),
+        "block_geoid": pa.Column(str, nullable=True),
+        "technology_code": pa.Column(str, nullable=True),
+        "max_download_mbps": pa.Column(float, pa.Check.ge(0), nullable=True),
+        "max_upload_mbps": pa.Column(float, pa.Check.ge(0), nullable=True),
+        "low_latency": pa.Column(str, nullable=True),
+        "geometry_geojson": pa.Column(str, nullable=True),
+        **_PROVENANCE,
+    },
+    strict=True,
+    coerce=True,
+)
+
+
+NHD_WATERBODY_SCHEMA = pa.DataFrameSchema(
+    {
+        "object_id": pa.Column(float, nullable=True),
+        "gnis_name": pa.Column(str, nullable=True),
+        "feature_type": pa.Column(str, nullable=True),
+        "feature_code": pa.Column(str, nullable=True),
+        "area_sq_km": pa.Column(float, pa.Check.ge(0), nullable=True),
+        "reach_code": pa.Column(str, nullable=True),
+        "geometry_geojson": pa.Column(str, nullable=True),
+        **_PROVENANCE,
+    },
+    strict=True,
+    coerce=True,
+)
+
+
+FEMA_FLOODPLAIN_SCHEMA = pa.DataFrameSchema(
+    {
+        "object_id": pa.Column(float, nullable=True),
+        "flood_area_id": pa.Column(str, nullable=True),
+        "flood_zone": pa.Column(str, nullable=True),
+        "zone_subtype": pa.Column(str, nullable=True),
+        "sfha_flag": pa.Column(str, nullable=True),
+        "static_bfe_ft": pa.Column(float, nullable=True),
+        "depth_ft": pa.Column(float, nullable=True),
+        "geometry_geojson": pa.Column(str, nullable=True),
+        **_PROVENANCE,
+    },
+    strict=True,
+    coerce=True,
+)
+
+
 SCHEMAS = {
     "eia930": EIA930_SCHEMA,
     "eia_ng": EIA_NG_SCHEMA,
@@ -108,4 +179,8 @@ SCHEMAS = {
     "ercot_lmp": ERCOT_LMP_SCHEMA,
     "noaa_forecast": NOAA_FORECAST_SCHEMA,
     "noaa_obs": NOAA_OBS_SCHEMA,
+    "blm_sma": BLM_SMA_SCHEMA,
+    "hifld_fiber": HIFLD_FIBER_SCHEMA,
+    "nhd_waterbody": NHD_WATERBODY_SCHEMA,
+    "fema_floodplain": FEMA_FLOODPLAIN_SCHEMA,
 }
