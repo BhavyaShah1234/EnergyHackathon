@@ -1,4 +1,4 @@
-/* ─── Reset & Root ─────────────────────────────────────── */
+﻿/* ─── Reset & Root ─────────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
   --dark:        #0C0B09;
@@ -142,7 +142,9 @@ nav {
 .hero-headline em {
   font-style: normal;
   background: linear-gradient(135deg, var(--orange-light) 0%, #FFB347 100%);
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 .hero-sub {
   font-size: 18px; font-weight: 400; line-height: 1.65;
@@ -345,40 +347,6 @@ section { padding: 100px 24px; }
 .score-fill--b { background: var(--orange); width: 0; }
 .score-fill--c { background: var(--teal); width: 0; }
 
-/* ─── Workflow Section ──────────────────────────────────── */
-#workflow { background: var(--dark); }
-.workflow-steps {
-  display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px;
-  background: var(--dark-border); border-radius: 16px; overflow: hidden;
-  margin-bottom: 64px;
-}
-@media (max-width: 768px) { .workflow-steps { grid-template-columns: 1fr 1fr; } }
-.workflow-step {
-  background: var(--dark-card); padding: 40px 32px;
-  position: relative; overflow: hidden;
-  transition: background 0.3s;
-}
-.workflow-step:hover { background: #1A1814; }
-.step-num {
-  font-family: var(--mono); font-size: 11px; font-weight: 600;
-  letter-spacing: 0.12em; color: var(--text-muted);
-  margin-bottom: 20px; display: block;
-}
-.step-title {
-  font-size: 18px; font-weight: 700; letter-spacing: -0.02em;
-  color: var(--text-dark); margin-bottom: 12px;
-}
-.step-desc {
-  font-size: 14px; line-height: 1.65; color: var(--text-muted);
-}
-.step-accent {
-  position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
-}
-.step-accent--1 { background: var(--green); }
-.step-accent--2 { background: var(--orange); }
-.step-accent--3 { background: var(--teal); }
-.step-accent--4 { background: linear-gradient(90deg, var(--green), var(--orange), var(--teal)); }
-
 /* ─── Live Feed Ticker ──────────────────────────────────── */
 #ticker {
   background: var(--dark); overflow: hidden;
@@ -416,53 +384,6 @@ section { padding: 100px 24px; }
 .ticker-item span { color: var(--text-dark); font-weight: 600; }
 .ticker-item .up { color: #22C55E; }
 .ticker-item .down { color: #EF4444; }
-
-/* ─── Quality Section (light — matches scoring / parchment) ─ */
-#quality {
-  background: var(--parchment);
-  border-top: 1px solid var(--parchment-border);
-  border-bottom: 1px solid var(--parchment-border);
-}
-.quality-grid {
-  display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px;
-  background: var(--parchment-border);
-  border-radius: 16px;
-  overflow: hidden;
-  border: 1px solid var(--parchment-border);
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
-}
-@media (max-width: 768px) { .quality-grid { grid-template-columns: 1fr; } }
-.quality-item {
-  background: #fff;
-  padding: 36px 32px;
-  transition: background 0.2s;
-}
-.quality-item:hover { background: var(--parchment-2); }
-.quality-icon {
-  width: 44px; height: 44px; border-radius: 10px;
-  display: flex; align-items: center; justify-content: center;
-  margin-bottom: 20px;
-}
-.quality-icon--orange { background: var(--orange-glow); }
-.quality-icon--teal   { background: var(--teal-glow); }
-.quality-icon--green  { background: var(--green-glow); }
-.quality-icon svg { width: 22px; height: 22px; }
-.quality-title {
-  font-size: 16px; font-weight: 700;
-  color: var(--text-on-light);
-  margin-bottom: 10px; letter-spacing: -0.015em;
-}
-.quality-desc {
-  font-size: 13px; line-height: 1.7;
-  color: #5A4E3A;
-}
-.quality-desc .mono {
-  font-size: 12px;
-  color: #3A3020;
-  background: rgba(26, 21, 16, 0.06);
-  padding: 1px 6px;
-  border-radius: 4px;
-}
 
 /* ─── Code Block ────────────────────────────────────────── */
 .code-block {
@@ -795,7 +716,6 @@ footer {
   display: flex; align-items: flex-end; justify-content: space-between;
   flex-wrap: wrap; gap: 24px;
 }
-.sitemap-header-inner {}
 .sitemap-sub {
   font-family: var(--mono); font-size: 12px; color: var(--text-muted);
   margin-top: 10px;

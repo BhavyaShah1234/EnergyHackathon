@@ -184,7 +184,7 @@ export default function SiteMap({ comparePins = [], onCompareAdd, onCompareClear
   return (
     <section id="sitemap" style={{ padding: 0 }}>
       <div className="sitemap-header">
-        <div className="sitemap-header-inner">
+        <div>
           <span className="section-eyebrow section-eyebrow--green">Site Map</span>
           <h2
             className="section-title section-title--light"
