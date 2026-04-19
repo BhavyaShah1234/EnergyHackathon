@@ -101,6 +101,13 @@ REGISTRY: dict[str, DatasetEntry] = {
         join_keys=["object_id"],
         description="FEMA NFHL flood hazard zones — 100yr/500yr floodplain (AZ/NM/TX)",
     ),
+    # --- Natural gas infrastructure (Collide sub-B: gas supply reliability) ---
+    "pipelines_infra": DatasetEntry(
+        source="pipelines_infra", dataset="pipelines_infra",
+        module="pipeline.sources.pipelines_infra", class_name="PipelineInfraIngestor",
+        join_keys=["pipeline_id"],
+        description="NG pipeline routes (spatial + type + operator) — EIA ArcGIS, WECC-SW + ERCOT bbox",
+    ),
 }
 
 

@@ -172,6 +172,33 @@ FEMA_FLOODPLAIN_SCHEMA = pa.DataFrameSchema(
 )
 
 
+# --- Natural gas infrastructure (Collide sub-B: gas supply reliability) ---
+
+PIPELINE_INFRA_SCHEMA = pa.DataFrameSchema(
+    {
+        "pipeline_id": pa.Column(int, nullable=False),
+        "pipe_type": pa.Column(str, pa.Check.isin(["Interstate", "Intrastate"])),
+        "operator": pa.Column(str, nullable=True),
+        "status": pa.Column(str, nullable=True),
+        # North America envelope — catches flipped lat/lon or bad geometry, but
+        # lets segments that cross the query bbox through (they legitimately extend
+        # slightly outside when spatialRel=Intersects matches a boundary-crossing line).
+        "start_lon": pa.Column(float, pa.Check.in_range(-170.0, -50.0)),
+        "start_lat": pa.Column(float, pa.Check.in_range(15.0, 72.0)),
+        "end_lon": pa.Column(float, pa.Check.in_range(-170.0, -50.0)),
+        "end_lat": pa.Column(float, pa.Check.in_range(15.0, 72.0)),
+        "midpoint_lon": pa.Column(float, pa.Check.in_range(-170.0, -50.0)),
+        "midpoint_lat": pa.Column(float, pa.Check.in_range(15.0, 72.0)),
+        "length_km": pa.Column(float, pa.Check.in_range(0.0, 5000.0)),
+        "num_vertices": pa.Column(int, pa.Check.ge(2)),
+        "geometry_wkt": pa.Column(str, nullable=False),
+        **_PROVENANCE,
+    },
+    strict=True,
+    coerce=True,
+)
+
+
 SCHEMAS = {
     "eia930": EIA930_SCHEMA,
     "eia_ng": EIA_NG_SCHEMA,
@@ -183,4 +210,5 @@ SCHEMAS = {
     "hifld_fiber": HIFLD_FIBER_SCHEMA,
     "nhd_waterbody": NHD_WATERBODY_SCHEMA,
     "fema_floodplain": FEMA_FLOODPLAIN_SCHEMA,
+    "pipelines_infra": PIPELINE_INFRA_SCHEMA,
 }

@@ -108,6 +108,14 @@ sources:
     natural_key: [object_id]
     region: SW
 
+  pipelines_infra:
+    description: Natural gas interstate & intrastate pipeline routes (EIA ArcGIS). Static infra reference — spatial coords + type + operator per segment, filtered to WECC-SW + ERCOT bbox.
+    endpoint: https://services2.arcgis.com/FiaPA4ga0iQKduv3/arcgis/rest/services/Natural_Gas_Interstate_and_Intrastate_Pipelines_1/FeatureServer/0/query
+    cadence_seconds: 604800     # weekly — EIA updates the layer annually at most
+    freshness_sla_hours: 168    # _fetched_at_utc; every successful run refreshes so this always passes
+    natural_key: [pipeline_id]
+    region: SW
+
   noaa_phoenix:
     description: NOAA NWS gridpoint forecast for Phoenix (PSR/158,56) — temperature, windSpeed, visibility for sandstorm trigger
     endpoint: https://api.weather.gov/gridpoints/PSR/158,56/forecast/hourly
@@ -138,6 +146,7 @@ http:
     broadbandmap.fcc.gov: 1
     hydro.nationalmap.gov: 1
     hazards.fema.gov: 1
+    services2.arcgis.com: 4
 
 # Retention for raw audit trail
 retention:

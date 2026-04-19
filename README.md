@@ -27,13 +27,14 @@ Pulls grid, market, weather, gas, geospatial, and infrastructure data from the p
 | **FCC BDC Fiber** (FTTP, AZ/NM/TX) | `hifld_fiber` | Daily | Collide sub-A | [FCC Broadband Data Collection](https://broadbandmap.fcc.gov/) |
 | **USGS NHD Waterbodies** (AZ/NM/TX) | `nhd_waterbody` | Daily | Collide sub-A | [USGS NHD](https://www.usgs.gov/national-hydrography/national-hydrography-dataset) · [MapServer](https://hydro.nationalmap.gov/arcgis/rest/services/nhd/MapServer) |
 | **FEMA NFHL Floodplain** (AZ/NM/TX) | `fema_floodplain` | Daily | Collide sub-A | [FEMA NFHL](https://www.fema.gov/flood-maps/national-flood-hazard-layer) · [REST Service](https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer) |
+| **EIA NG Pipelines** (Interstate/Intrastate routes, WECC-SW + ERCOT) | `pipelines_infra` | Weekly | Collide sub-B | [EIA Natural Gas Pipelines (ArcGIS)](https://atlas.eia.gov/) · [FeatureServer](https://services2.arcgis.com/FiaPA4ga0iQKduv3/arcgis/rest/services/Natural_Gas_Interstate_and_Intrastate_Pipelines_1/FeatureServer/0) |
 
 ### ⏸ Pending
 
 | Source | Reason |
 |---|---|
 | ERCOT MIS (LMP, DAM, fuel-mix, outages) | Pending developer token from [mis.ercot.com](https://mis.ercot.com) |
-| PHMSA Annual Report + Incident DB | Static bulk; not yet loaded |
+| PHMSA Annual Report + Incident DB (vintage/material) | phmsa.dot.gov bulk files are Akamai-blocked to automated clients; EIA pipeline layer covers spatial/type/operator — join to operator-level vintage via manual upload |
 | EIA-176 / EIA-757 | Static bulk; not yet loaded |
 | Pecan Street, NREL SMART-DS / NSRDB / EVI-Pro | Static; not yet loaded |
 
@@ -199,6 +200,29 @@ Every row that enters silver passes a [pandera](https://pandera.readthedocs.io/)
 | `geometry_geojson` | `str` | nullable | Flood zone polygon (GeoJSON) |
 
 **Natural key:** `(object_id)` · **Freshness SLA:** 168h (weekly — static data)
+
+---
+
+### `pipelines_infra` — Natural Gas Pipeline Routes (EIA)
+
+> Official docs: [U.S. Energy Atlas](https://atlas.eia.gov/) · [Natural Gas Interstate and Intrastate Pipelines FeatureServer](https://services2.arcgis.com/FiaPA4ga0iQKduv3/arcgis/rest/services/Natural_Gas_Interstate_and_Intrastate_Pipelines_1/FeatureServer/0) · Collide sub-B
+
+| Column | Type | Constraints | Description |
+|---|---|---|---|
+| `pipeline_id` | `int` | not null | EIA `FID` (stable per segment) |
+| `pipe_type` | `str` | ∈ {Interstate, Intrastate} | FERC/state jurisdiction split |
+| `operator` | `str` | nullable | Pipeline operator (e.g. `El Paso Natural Gas Co`, `Kinder Morgan Texas Pipeline Co`) |
+| `status` | `str` | nullable | Operational status (`Operating`, `Proposed`, etc.) |
+| `start_lon` / `start_lat` | `float` | NA envelope | First vertex of the polyline (WGS84) |
+| `end_lon` / `end_lat` | `float` | NA envelope | Last vertex (WGS84) |
+| `midpoint_lon` / `midpoint_lat` | `float` | NA envelope | Unweighted centroid of all vertices |
+| `length_km` | `float` | [0, 5000] | Great-circle length along the polyline |
+| `num_vertices` | `int` | ≥ 2 | Polyline vertex count |
+| `geometry_wkt` | `str` | not null | OGC `LINESTRING (lon lat, ...)` for GIS tools |
+
+**Natural key:** `(pipeline_id)` · **Freshness SLA:** 168h · **Scope:** WECC-SW + ERCOT bbox (`-125..-93`, `25..42`)
+
+> **Known gap — vintage/material:** The EIA public layer does not expose install year or pipe material per segment. Collide sub-B's failure-probability modeling expects both. Source them from PHMSA Annual Report form 7100.1-1 (operator-level, joined on `operator` + state); `phmsa.dot.gov` bulk files currently Akamai-block anonymous automated fetches so manual upload into `data/raw/phmsa/` is the interim path.
 
 ---
 
