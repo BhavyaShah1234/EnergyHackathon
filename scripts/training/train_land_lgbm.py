@@ -211,6 +211,7 @@ if CKPT_MODEL is None:
         "colsample_bytree": 0.8,
         "random_state":    42,
         "verbose":         -1,
+        "device":          "gpu",
     }
     model = lgb.LGBMClassifier(**params)
     model.fit(

@@ -28,6 +28,7 @@ install("scikit-learn")
 install("pandas")
 install("numpy")
 install("matplotlib")
+install("torch")
 
 try:
     from google.colab import drive
@@ -38,10 +39,20 @@ except Exception:
     CKPT_DIR = "/tmp/collide_checkpoints"
     print(f"⚠️  Not on Colab — checkpoints at {CKPT_DIR}")
 
-import os, pickle
+import os, pickle, sys
 import numpy as np
 import pandas as pd
 from pathlib import Path
+
+# Import GPUKernelDensity from the backend module so pickle can resolve it on load
+_root = Path(__file__).resolve().parents[2]
+if str(_root) not in sys.path:
+    sys.path.insert(0, str(_root))
+from backend.scoring.gas import GPUKernelDensity
+
+import torch
+_DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
+print(f"  Using device: {_DEVICE}")
 
 os.makedirs(CKPT_DIR, exist_ok=True)
 MODEL_OUT = Path("data/models")
@@ -187,19 +198,17 @@ else:
 
 print("\n📐 Step 2: Fit Gaussian KDE on incident locations")
 
-from sklearn.neighbors import KernelDensity
-
 CKPT_KDE = load_ckpt("gas_kde_model")
 
 if CKPT_KDE is None:
     coords = phmsa_df[['lat', 'lon']].values
     weights = phmsa_df['severity_weight'].values
 
-    # Normalize weights for sklearn (it treats them as sample weights)
-    weights_norm = weights / weights.sum() * len(weights)
+    # Normalize weights
+    weights_norm = weights / weights.sum()
 
     # bandwidth=0.5 degrees ≈ 55km — appropriate for regional pipeline reliability
-    kde = KernelDensity(kernel='gaussian', bandwidth=0.5)
+    kde = GPUKernelDensity(bandwidth=0.5)
     kde.fit(coords, sample_weight=weights_norm)
 
     # Validate: score a known high-risk area (Permian Basin) vs. low-risk

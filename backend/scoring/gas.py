@@ -1,5 +1,40 @@
 """Gas Supply Reliability scorer. Loads KDE from data/models/gas_kde.pkl when available."""
 from pathlib import Path
+import numpy as np
+
+
+class GPUKernelDensity:
+    """GPU-accelerated Gaussian KDE (PyTorch) with sklearn KernelDensity-compatible interface.
+
+    Stored in this module so pickle can resolve the class on load.
+    Falls back to CPU tensors when CUDA is unavailable.
+    """
+
+    def __init__(self, bandwidth=0.5):
+        self.bandwidth = bandwidth
+        self._train_pts = None
+        self._log_weights = None
+
+    def fit(self, X, sample_weight=None):
+        import torch
+        w = np.ones(len(X), dtype=np.float32) if sample_weight is None else np.array(sample_weight, dtype=np.float32)
+        w /= w.sum()
+        device = "cuda" if torch.cuda.is_available() else "cpu"
+        self._train_pts = torch.tensor(X, dtype=torch.float32).to(device)
+        self._log_weights = torch.tensor(np.log(w), dtype=torch.float32).to(device)
+        return self
+
+    def score_samples(self, X):
+        import torch
+        device = self._train_pts.device
+        X_t = torch.tensor(np.array(X, dtype=np.float32)).to(device)
+        diff = X_t.unsqueeze(1) - self._train_pts.unsqueeze(0)
+        sq_dist = (diff ** 2).sum(dim=-1)
+        D = X_t.shape[1]
+        log_norm = -D * (np.log(self.bandwidth) + 0.5 * np.log(2 * np.pi))
+        log_kernel = -0.5 * sq_dist / (self.bandwidth ** 2)
+        log_density = torch.logsumexp(log_kernel + self._log_weights.unsqueeze(0), dim=1) + log_norm
+        return log_density.cpu().numpy()
 
 _KDE_PATH = Path('data/models/gas_kde.pkl')
 

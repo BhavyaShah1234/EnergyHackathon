@@ -27,19 +27,31 @@ import subprocess, sys
 def install(pkg):
     subprocess.check_call([sys.executable, "-m", "pip", "install", "-q", pkg])
 
-install("scikit-learn")
-install("pandas")
-install("numpy")
-install("matplotlib")
-install("transformers")
-install("accelerate")
+def install_if_missing(pkg, import_name=None):
+    name = import_name or pkg.split("[")[0].replace("-", "_")
+    try:
+        __import__(name)
+    except ImportError:
+        subprocess.check_call([sys.executable, "-m", "pip", "install", "-q", "--no-deps", pkg])
+
+install_if_missing("scikit-learn", "sklearn")
+install_if_missing("pandas")
+install_if_missing("numpy")
+install_if_missing("matplotlib")
+install_if_missing("transformers")
+install_if_missing("accelerate")
 
 try:
-    install("uni2ts")
+    import uni2ts  # noqa: F401
     MOIRAI_AVAILABLE = True
-except Exception:
-    MOIRAI_AVAILABLE = False
-    print("⚠️  uni2ts not installed — Moirai will be skipped, using ARIMA baseline")
+except ImportError:
+    try:
+        # --no-deps avoids torch downgrade from uni2ts's torch<2.5 constraint
+        subprocess.check_call([sys.executable, "-m", "pip", "install", "-q", "--no-deps", "uni2ts"])
+        MOIRAI_AVAILABLE = True
+    except Exception:
+        MOIRAI_AVAILABLE = False
+        print("⚠️  uni2ts not installed — Moirai will be skipped, using ARIMA baseline")
 
 try:
     from google.colab import drive
@@ -186,28 +198,35 @@ if CKPT_FORECAST is None:
             print(f"  Using device: {device}")
 
             # Load pre-trained Moirai-large
-            model = MoiraiForecast.load_from_checkpoint(
+            # Use direct constructor (load_from_checkpoint API changed in newer Lightning)
+            model = MoiraiForecast(
+                module=MoiraiModule.from_pretrained("Salesforce/moirai-1.0-R-large"),
                 prediction_length=72,
                 context_length=720,  # 30 days of context
-                patch_size="auto",
+                patch_size=32,
                 num_samples=100,     # for P10/P50/P90
                 target_dim=1,
                 feat_dynamic_real_dim=0,
-                observed_mask_dim=0,
-                module=MoiraiModule.from_pretrained("Salesforce/moirai-1.0-R-large"),
-            ).to(device)
+                past_feat_dynamic_real_dim=0,
+            )
 
             save_ckpt("moirai_model_loaded", True)  # mark as loaded
+
+            from gluonts.dataset.pandas import PandasDataset
+
+            model = model.to(device)
+            predictor = model.create_predictor(batch_size=32)
 
             for node, series in lmp_history.items():
                 print(f"  Forecasting {node}...")
 
-                # Prepare input: last 720 hours (30 days) as context
-                context = torch.tensor(series[-720:], dtype=torch.float32).unsqueeze(0).unsqueeze(-1)
+                # Build a GluonTS-compatible PandasDataset from the last 720h context
+                idx = pd.date_range("2020-01-01", periods=720, freq="h")
+                df_node = pd.DataFrame({"target": series[-720:].astype(float)}, index=idx)
+                ds = PandasDataset(df_node, target="target")
 
-                with torch.no_grad():
-                    forecast_samples = model(context.to(device))  # (1, num_samples, 72)
-                    samples = forecast_samples.cpu().numpy()[0]    # (100, 72)
+                fc_list = list(predictor.predict(ds))
+                samples = fc_list[0].samples  # (num_samples, 72)
 
                 forecasts[node] = {
                     'p10': np.percentile(samples, 10, axis=0),
@@ -234,12 +253,13 @@ if CKPT_FORECAST is None:
                 train = series[-336:]
                 try:
                     arima = ARIMA(train, order=(2, 1, 2)).fit()
-                    fc = arima.forecast(steps=72)
+                    fc = np.asarray(arima.forecast(steps=72))
                     ci = arima.get_forecast(steps=72).conf_int(alpha=0.2)
+                    ci = np.asarray(ci)  # works whether conf_int returns DataFrame or ndarray
                     forecasts[node] = {
-                        'p10': ci.iloc[:, 0].values,
-                        'p50': fc.values,
-                        'p90': ci.iloc[:, 1].values,
+                        'p10': ci[:, 0],
+                        'p50': fc,
+                        'p90': ci[:, 1],
                         'method': 'ARIMA(2,1,2)',
                     }
                     print(f"    P50 next 24h: ${fc[:24].mean():.1f}/MWh")
