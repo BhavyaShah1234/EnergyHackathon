@@ -1,0 +1,10 @@
+node_modules
+dist
+.env
+.collide-api-port
+
+__pycache__/
+*.py[cod]
+*.pyc
+.Python
+.claude/

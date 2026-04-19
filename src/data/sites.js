@@ -1,0 +1,168 @@
+// ─── Candidate Sites ───────────────────────────────────────────────────────
+export const SITES = [
+  {
+    id: 'TX-PB-001',
+    name: 'Permian Prime',
+    shortName: 'PERM-A',
+    location: 'Midland, TX',
+    lat: 31.9973, lng: -102.0779,
+    state: 'TX', market: 'ERCOT',
+    acres: 1240, landCostPerAcre: 950,
+    fiberKm: 1.8, waterKm: 6.2, pipelineKm: 0.4,
+    gasHub: 'Waha', gasPrice: 1.84,
+    lmpNode: 'HB_WEST', lmp: null,
+    estPowerCostMwh: 26.40,
+    totalLandCostM: 1.18,
+    scores: { subA: 0.92, subB: 0.88, subC: 0.74, composite: 0.85 },
+    rank: 1,
+  },
+  {
+    id: 'TX-WJ-001',
+    name: 'Waha Junction',
+    shortName: 'WAHA-A',
+    location: 'Pecos, TX',
+    lat: 31.4224, lng: -104.2029,
+    state: 'TX', market: 'ERCOT',
+    acres: 890, landCostPerAcre: 780,
+    fiberKm: 4.2, waterKm: 12.1, pipelineKm: 0.1,
+    gasHub: 'Waha', gasPrice: 1.84,
+    lmpNode: 'HB_WEST', lmp: null,
+    estPowerCostMwh: 24.80,
+    totalLandCostM: 0.69,
+    scores: { subA: 0.78, subB: 0.95, subC: 0.76, composite: 0.83 },
+    rank: 2,
+  },
+  {
+    id: 'NM-DB-001',
+    name: 'Delaware Basin',
+    shortName: 'DLWR-A',
+    location: 'Carlsbad, NM',
+    lat: 32.4207, lng: -104.2288,
+    state: 'NM', market: 'ERCOT',
+    acres: 1580, landCostPerAcre: 620,
+    fiberKm: 6.8, waterKm: 4.3, pipelineKm: 0.8,
+    gasHub: 'Waha', gasPrice: 1.84,
+    lmpNode: 'HB_WEST', lmp: null,
+    estPowerCostMwh: 27.20,
+    totalLandCostM: 0.98,
+    scores: { subA: 0.85, subB: 0.82, subC: 0.71, composite: 0.80 },
+    rank: 3,
+  },
+  {
+    id: 'TX-WTP-001',
+    name: 'West Texas Plains',
+    shortName: 'WTP-A',
+    location: 'Andrews, TX',
+    lat: 32.3170, lng: -102.5535,
+    state: 'TX', market: 'ERCOT',
+    acres: 2100, landCostPerAcre: 720,
+    fiberKm: 3.1, waterKm: 9.4, pipelineKm: 1.2,
+    gasHub: 'Waha', gasPrice: 1.84,
+    lmpNode: 'HB_WEST', lmp: null,
+    estPowerCostMwh: 28.10,
+    totalLandCostM: 1.51,
+    scores: { subA: 0.88, subB: 0.79, subC: 0.68, composite: 0.79 },
+    rank: 4,
+  },
+  {
+    id: 'TX-PS-001',
+    name: 'Permian South',
+    shortName: 'PERM-S',
+    location: 'Odessa, TX',
+    lat: 31.8457, lng: -102.3676,
+    state: 'TX', market: 'ERCOT',
+    acres: 760, landCostPerAcre: 1100,
+    fiberKm: 0.8, waterKm: 3.2, pipelineKm: 0.6,
+    gasHub: 'Waha', gasPrice: 1.84,
+    lmpNode: 'HB_WEST', lmp: null,
+    estPowerCostMwh: 27.60,
+    totalLandCostM: 0.84,
+    scores: { subA: 0.82, subB: 0.84, subC: 0.72, composite: 0.79 },
+    rank: 5,
+  },
+  {
+    id: 'TX-PH-001',
+    name: 'Panhandle',
+    shortName: 'PAN-A',
+    location: 'Amarillo, TX',
+    lat: 35.2220, lng: -101.8313,
+    state: 'TX', market: 'ERCOT',
+    acres: 1850, landCostPerAcre: 580,
+    fiberKm: 2.4, waterKm: 5.6, pipelineKm: 1.8,
+    gasHub: 'Panhandle EP', gasPrice: 1.90,
+    lmpNode: 'HB_NORTH', lmp: null,
+    estPowerCostMwh: 27.80,
+    totalLandCostM: 1.07,
+    scores: { subA: 0.86, subB: 0.76, subC: 0.69, composite: 0.77 },
+    rank: 6,
+  },
+  {
+    id: 'NM-RC-001',
+    name: 'Roswell Corridor',
+    shortName: 'RSW-A',
+    location: 'Roswell, NM',
+    lat: 33.3942, lng: -104.5230,
+    state: 'NM', market: 'WECC',
+    acres: 1020, landCostPerAcre: 540,
+    fiberKm: 5.6, waterKm: 7.8, pipelineKm: 2.1,
+    gasHub: 'Waha', gasPrice: 1.90,
+    lmpNode: 'PALOVRDE_ASR-APND', lmp: 38.50,
+    estPowerCostMwh: 29.40,
+    totalLandCostM: 0.55,
+    scores: { subA: 0.76, subB: 0.72, subC: 0.65, composite: 0.71 },
+    rank: 7,
+  },
+  {
+    id: 'AZ-PD-001',
+    name: 'Phoenix Desert',
+    shortName: 'PHX-A',
+    location: 'Buckeye, AZ',
+    lat: 33.3703, lng: -112.5838,
+    state: 'AZ', market: 'WECC',
+    acres: 640, landCostPerAcre: 2800,
+    fiberKm: 1.2, waterKm: 2.1, pipelineKm: 3.4,
+    gasHub: 'SoCal Gas', gasPrice: 3.10,
+    lmpNode: 'PALOVRDE_ASR-APND', lmp: 38.50,
+    estPowerCostMwh: 34.20,
+    totalLandCostM: 1.79,
+    scores: { subA: 0.71, subB: 0.58, subC: 0.82, composite: 0.70 },
+    rank: 8,
+  },
+]
+
+export const SORTED_SITES = [...SITES].sort((a, b) => b.scores.composite - a.scores.composite)
+
+// ─── 30-day Gas Price History ──────────────────────────────────────────────
+// Realistic Waha Hub / Henry Hub daily prices (Apr 2025 to present)
+const buildPriceHistory = () => {
+  const seed = [
+    [1.62, 3.28], [1.58, 3.31], [1.65, 3.35], [1.71, 3.29], [1.68, 3.33],
+    [1.74, 3.38], [1.70, 3.36], [1.66, 3.40], [1.72, 3.37], [1.78, 3.42],
+    [1.76, 3.39], [1.80, 3.44], [1.75, 3.41], [1.82, 3.45], [1.79, 3.43],
+    [1.85, 3.48], [1.81, 3.46], [1.87, 3.50], [1.83, 3.47], [1.80, 3.44],
+    [1.76, 3.41], [1.82, 3.43], [1.86, 3.46], [1.84, 3.44], [1.88, 3.48],
+    [1.85, 3.45], [1.81, 3.42], [1.84, 3.41], [1.86, 3.43], [1.84, 3.41],
+  ]
+  return seed.map(([waha, henry], i) => {
+    const d = new Date()
+    d.setDate(d.getDate() - (29 - i))
+    return {
+      date: d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }),
+      waha: +waha.toFixed(2),
+      henry: +henry.toFixed(2),
+      spread: +(henry - waha).toFixed(2),
+    }
+  })
+}
+
+export const GAS_PRICE_HISTORY = buildPriceHistory()
+
+// ─── Market Snapshot ───────────────────────────────────────────────────────
+export const MARKET_SNAPSHOT = {
+  wahaHub:    { price: 1.84, unit: '/MMBtu', change: +0.12, pct: +7.0 },
+  henryHub:   { price: 3.41, unit: '/MMBtu', change: -0.08, pct: -2.3 },
+  spread:     { value: 1.57, label: 'Waha Discount', advantage: true },
+  paloverdeL: { price: 38.50, unit: '/MWh', change: +2.10, pct: +5.8 },
+  sp15Lmp:    { price: 42.30, unit: '/MWh', change: +1.90, pct: +4.7 },
+  azpsDemand: { value: 8420, unit: 'MW', change: +1.2 },
+}
