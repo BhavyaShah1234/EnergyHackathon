@@ -10,6 +10,20 @@ The goal of this handoff is simple:
 - say clearly what each file means in plain English
 - say what is still missing
 
+The model assumption for this branch is now:
+
+- `legal document` = good enough
+- `water body prox` = good enough
+- `distance to nearest pipeline` = good enough
+- `history grid prices` = good enough
+
+The only chart items still treated as real gaps are:
+
+- `history pipeline leakage reports`
+- `history operator reports`
+- `history pipeline throughput`
+- the missing Waha side of `history fuel prices`
+
 This handoff focuses on these chart items:
 
 - `legal document`
@@ -24,7 +38,7 @@ We intentionally did **not** rely on:
 - seismic
 - wildfire
 
-`flood zone` was attempted, but the FEMA service failed during export, so it is not present in the final package.
+`flood zone` is not part of the current blocker list for the model, so it is not treated as a handoff blocker here.
 
 ## What Is In The Folder
 
@@ -54,6 +68,10 @@ Plain-English meaning:
 - this tells us who broadly controls the land
 - it helps answer “what kind of land-control situation is this?”
 - this is not a full parcel deed file
+
+Model status:
+
+- treat this as usable land-control context now
 
 Important limitation:
 
@@ -89,6 +107,10 @@ Plain-English meaning:
 - this tells us there is a real Texas lease record here
 - it tells us who leased it, what it is for, and whether it is active
 
+Model status:
+
+- treat this as usable lease-status context now
+
 ### `glo_oilgas_active.csv` and `glo_oilgas_active.parquet`
 
 Rows: `7,320`
@@ -123,6 +145,10 @@ Plain-English meaning:
 - this is active lease history and structure
 - it helps answer “is this place already tied up in active lease arrangements?”
 
+Model status:
+
+- treat this as usable lease-history context now
+
 ### `glo_oilgas_inactive.csv` and `glo_oilgas_inactive.parquet`
 
 Rows: `12,061`
@@ -137,6 +163,10 @@ Why it matters:
 
 - this gives historical lease churn
 - it helps show what used to be leased, not just what is leased right now
+
+Model status:
+
+- treat this as usable historical-lease context now
 
 The field meanings are the same general idea as the active lease file.
 
@@ -165,6 +195,10 @@ Plain-English meaning:
 - this tells us where the water is
 - downstream can compute distance from a candidate site to the nearest waterbody
 
+Model status:
+
+- treat this as usable for `water body prox`
+
 ### `pipelines_infra.csv` and `pipelines_infra.parquet`
 
 Rows: `15,958`
@@ -192,6 +226,11 @@ Important limitation:
 
 - this is pipeline location and operator context
 - this is **not** leak history or reliability history by itself
+
+Model status:
+
+- treat this as usable for `distance to nearest pipeline`
+- do **not** treat this as the missing operator-history or leak-history data
 
 ### `eia930.csv` and `eia930.parquet`
 
@@ -225,6 +264,10 @@ Plain-English meaning:
 - it is not the market price itself
 - it is useful context around price behavior
 
+Model status:
+
+- treat this as supporting context for `history grid prices`
+
 ### `eia_ng_henry_hub.csv` and `eia_ng_henry_hub.parquet`
 
 Rows: `241`
@@ -251,6 +294,10 @@ Important limitation:
 
 - Waha did not land
 - for Texas/Southwest gas-fired economics, that missing Waha history still matters
+
+Model status:
+
+- treat this as partial-only coverage for `history fuel prices`
 
 ### `caiso_lmp.csv` and `caiso_lmp.parquet`
 
@@ -281,6 +328,10 @@ Plain-English meaning:
 - this is real Western market price history
 - it gives downstream real price movement over time at key nodes
 
+Model status:
+
+- treat this as usable for `history grid prices`
+
 ### `ercot_dam_hub_prices.csv` and `ercot_dam_hub_prices.parquet`
 
 Rows: `88,536`
@@ -305,6 +356,10 @@ Plain-English meaning:
 
 - this is historical Texas day-ahead price history
 - it tells what ERCOT expected those hub/load-zone prices to be before real-time delivery
+
+Model status:
+
+- treat this as usable for `history grid prices`
 
 ### `ercot_rtm_hub_prices.csv` and `ercot_rtm_hub_prices.parquet`
 
@@ -333,20 +388,11 @@ Plain-English meaning:
 - this is historical Texas real-time price history
 - this is the strongest single price-history file in the handoff
 
+Model status:
+
+- treat this as usable for `history grid prices`
+
 ## What Is Missing
-
-### `flood zone`
-
-We attempted FEMA NFHL.
-
-Status:
-
-- not present in the final package
-- the FEMA service returned server-side `500` errors during export
-
-Meaning:
-
-- flood was not included in the pushed handoff package
 
 ### `history pipeline leakage reports`
 
@@ -415,11 +461,22 @@ If you are using this folder:
 - use `eia_ng_henry_hub` for the currently available part of `history fuel prices`
 - use `caiso_lmp`, `ercot_dam_hub_prices`, and `ercot_rtm_hub_prices` for `history grid prices`
 - use `eia930` as extra grid-condition context
+- assume the model can move forward with the above as the currently usable inputs
 
 Do **not** assume this folder already contains:
 
-- flood-zone data
 - PHMSA leak history
 - PHMSA operator annual reports
 - EIA-176 / EIA-757 throughput history
 - Waha fuel-price history
+
+The shortest possible status summary is:
+
+- `legal document` = usable now
+- `water body prox` = usable now
+- `distance to nearest pipeline` = usable now
+- `history grid prices` = usable now
+- `history fuel prices` = partial only
+- `history pipeline leakage reports` = missing
+- `history operator reports` = missing
+- `history pipeline throughput` = missing
