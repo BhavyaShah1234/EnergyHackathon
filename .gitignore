@@ -22,6 +22,12 @@ data/_samples/*
 !data/quarantine/.gitkeep
 !data/_meta/.gitkeep
 
+# Training data — keep quality reports + CSVs for team review, exclude parquet
+data/training/*.parquet
+data/training/*.bin
+!data/training/*.csv
+!data/training/*.json
+
 # Logs
 logs/*.log
 logs/*.jsonl

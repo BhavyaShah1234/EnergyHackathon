@@ -1,0 +1,520 @@
+{
+  "generated_at_utc": "2026-04-19T07:27:50.398124+00:00",
+  "total_rows": 16578,
+  "sources": {
+    "caiso_lmp": {
+      "row_count": 864,
+      "unique_sources": [
+        "caiso_lmp"
+      ],
+      "columns": {
+        "interval_end_utc": {
+          "non_null_count": 864,
+          "unique_count": 72,
+          "sample_values": [
+            "2026-04-19T01:30:00-00:00",
+            "2026-04-19T01:35:00-00:00",
+            "2026-04-19T01:40:00-00:00",
+            "2026-04-19T01:45:00-00:00",
+            "2026-04-19T01:50:00-00:00",
+            "2026-04-19T01:55:00-00:00",
+            "2026-04-19T02:00:00-00:00",
+            "2026-04-19T02:05:00-00:00",
+            "2026-04-19T02:10:00-00:00",
+            "2026-04-19T02:15:00-00:00"
+          ]
+        },
+        "interval_start_utc": {
+          "non_null_count": 864,
+          "unique_count": 72,
+          "sample_values": [
+            "2026-04-19T01:25:00-00:00",
+            "2026-04-19T01:30:00-00:00",
+            "2026-04-19T01:35:00-00:00",
+            "2026-04-19T01:40:00-00:00",
+            "2026-04-19T01:45:00-00:00",
+            "2026-04-19T01:50:00-00:00",
+            "2026-04-19T01:55:00-00:00",
+            "2026-04-19T02:00:00-00:00",
+            "2026-04-19T02:05:00-00:00",
+            "2026-04-19T02:10:00-00:00"
+          ]
+        },
+        "lmp_component": {
+          "non_null_count": 864,
+          "unique_count": 4,
+          "sample_values": [
+            "LMP",
+            "MCC",
+            "MCE",
+            "MCL"
+          ]
+        },
+        "node": {
+          "non_null_count": 864,
+          "unique_count": 3,
+          "sample_values": [
+            "PALOVRDE_ASR-APND",
+            "TH_NP15_GEN-APND",
+            "TH_SP15_GEN-APND"
+          ]
+        },
+        "price_usd_per_mwh": {
+          "non_null_count": 864,
+          "min": -1.7156,
+          "max": 48.224,
+          "mean": 15.4863,
+          "median": 17.3975,
+          "stdev": 12.312,
+          "p5": -1.1397,
+          "p25": 5.2225,
+          "p75": 26.4319,
+          "p95": 33.8502
+        }
+      },
+      "range_violations": [],
+      "null_rates": {
+        "interval_end_utc": 0.0,
+        "interval_start_utc": 0.0,
+        "lmp_component": 0.0,
+        "node": 0.0,
+        "price_usd_per_mwh": 0.0
+      },
+      "range_violations_count": 0,
+      "quality_pass": true
+    },
+    "eia930": {
+      "row_count": 15000,
+      "unique_sources": [
+        "eia930_azps",
+        "eia930_ciso",
+        "eia930_erco"
+      ],
+      "columns": {
+        "period_utc": {
+          "non_null_count": 15000,
+          "unique_count": 1275,
+          "sample_values": [
+            "2026-02-25T05",
+            "2026-02-25T06",
+            "2026-02-25T07",
+            "2026-02-25T08",
+            "2026-02-25T09",
+            "2026-02-25T10",
+            "2026-02-25T11",
+            "2026-02-25T12",
+            "2026-02-25T13",
+            "2026-02-25T14"
+          ]
+        },
+        "respondent": {
+          "non_null_count": 15000,
+          "unique_count": 3,
+          "sample_values": [
+            "AZPS",
+            "CISO",
+            "ERCO"
+          ]
+        },
+        "respondent_name": {
+          "non_null_count": 15000,
+          "unique_count": 3,
+          "sample_values": [
+            "Arizona Public Service Company",
+            "California Independent System Operator",
+            "Electric Reliability Council of Texas, Inc."
+          ]
+        },
+        "type": {
+          "non_null_count": 15000,
+          "unique_count": 4,
+          "sample_values": [
+            "D",
+            "DF",
+            "NG",
+            "TI"
+          ]
+        },
+        "type_name": {
+          "non_null_count": 15000,
+          "unique_count": 4,
+          "sample_values": [
+            "Day-ahead demand forecast",
+            "Demand",
+            "Net generation",
+            "Total interchange"
+          ]
+        },
+        "value_mw": {
+          "non_null_count": 15000,
+          "min": -10359.0,
+          "max": 67775.0,
+          "mean": 18481.5773,
+          "median": 10949.5,
+          "stdev": 21185.1049,
+          "p5": -3790.0,
+          "p25": 1596.0,
+          "p75": 40410.0,
+          "p95": 56855.0
+        }
+      },
+      "range_violations": [],
+      "null_rates": {
+        "period_utc": 0.0,
+        "respondent": 0.0,
+        "respondent_name": 0.0,
+        "type": 0.0,
+        "type_name": 0.0,
+        "value_mw": 0.0
+      },
+      "range_violations_count": 0,
+      "quality_pass": true
+    },
+    "eia_ng": {
+      "row_count": 58,
+      "unique_sources": [
+        "eia_ng_henry_hub"
+      ],
+      "columns": {
+        "period_utc": {
+          "non_null_count": 58,
+          "unique_count": 58,
+          "sample_values": [
+            "2026-01-20",
+            "2026-01-21",
+            "2026-01-22",
+            "2026-01-23",
+            "2026-01-26",
+            "2026-01-27",
+            "2026-01-28",
+            "2026-01-29",
+            "2026-01-30",
+            "2026-02-02"
+          ]
+        },
+        "price_usd_per_mmbtu": {
+          "non_null_count": 58,
+          "min": 2.64,
+          "max": 30.72,
+          "mean": 4.7541,
+          "median": 3.11,
+          "stdev": 5.0378,
+          "p5": 2.78,
+          "p25": 2.99,
+          "p75": 3.43,
+          "p95": 17.19
+        },
+        "series": {
+          "non_null_count": 58,
+          "unique_count": 1,
+          "sample_values": [
+            "RNGWHHD"
+          ]
+        },
+        "series_description": {
+          "non_null_count": 58,
+          "unique_count": 1,
+          "sample_values": [
+            "Henry Hub Natural Gas Spot Price (Dollars per Million Btu)"
+          ]
+        }
+      },
+      "range_violations": [],
+      "null_rates": {
+        "period_utc": 0.0,
+        "price_usd_per_mmbtu": 0.0,
+        "series": 0.0,
+        "series_description": 0.0
+      },
+      "range_violations_count": 0,
+      "quality_pass": true
+    },
+    "noaa_forecast": {
+      "row_count": 156,
+      "unique_sources": [
+        "noaa_phoenix"
+      ],
+      "columns": {
+        "end_time_utc": {
+          "non_null_count": 156,
+          "unique_count": 156,
+          "sample_values": [
+            "2026-04-19T01:00:00-07:00",
+            "2026-04-19T02:00:00-07:00",
+            "2026-04-19T03:00:00-07:00",
+            "2026-04-19T04:00:00-07:00",
+            "2026-04-19T05:00:00-07:00",
+            "2026-04-19T06:00:00-07:00",
+            "2026-04-19T07:00:00-07:00",
+            "2026-04-19T08:00:00-07:00",
+            "2026-04-19T09:00:00-07:00",
+            "2026-04-19T10:00:00-07:00"
+          ]
+        },
+        "grid_id": {
+          "non_null_count": 156,
+          "unique_count": 1,
+          "sample_values": [
+            "PSR/158,56"
+          ]
+        },
+        "is_daytime": {
+          "non_null_count": 156,
+          "min": 0.0,
+          "max": 1.0,
+          "mean": 0.5,
+          "median": 0.5,
+          "stdev": 0.5016,
+          "p5": 0.0,
+          "p25": 0.0,
+          "p75": 1.0,
+          "p95": 1.0
+        },
+        "probability_of_precipitation": {
+          "non_null_count": 156,
+          "min": 0.0,
+          "max": 6.0,
+          "mean": 0.2308,
+          "median": 0.0,
+          "stdev": 0.8714,
+          "p5": 0.0,
+          "p25": 0.0,
+          "p75": 0.0,
+          "p95": 2.0
+        },
+        "short_forecast": {
+          "non_null_count": 156,
+          "unique_count": 7,
+          "sample_values": [
+            "Clear",
+            "Mostly Clear",
+            "Mostly Cloudy",
+            "Mostly Sunny",
+            "Partly Cloudy",
+            "Partly Sunny",
+            "Sunny"
+          ]
+        },
+        "start_time_utc": {
+          "non_null_count": 156,
+          "unique_count": 156,
+          "sample_values": [
+            "2026-04-19T00:00:00-07:00",
+            "2026-04-19T01:00:00-07:00",
+            "2026-04-19T02:00:00-07:00",
+            "2026-04-19T03:00:00-07:00",
+            "2026-04-19T04:00:00-07:00",
+            "2026-04-19T05:00:00-07:00",
+            "2026-04-19T06:00:00-07:00",
+            "2026-04-19T07:00:00-07:00",
+            "2026-04-19T08:00:00-07:00",
+            "2026-04-19T09:00:00-07:00"
+          ]
+        },
+        "temperature_f": {
+          "non_null_count": 156,
+          "min": 62.0,
+          "max": 96.0,
+          "mean": 78.4038,
+          "median": 78.0,
+          "stdev": 9.4594,
+          "p5": 64.0,
+          "p25": 71.0,
+          "p75": 86.0,
+          "p95": 94.0
+        },
+        "wind_speed_mph": {
+          "non_null_count": 156,
+          "min": 0.0,
+          "max": 15.0,
+          "mean": 5.7692,
+          "median": 5.0,
+          "stdev": 3.6875,
+          "p5": 0.0,
+          "p25": 5.0,
+          "p75": 10.0,
+          "p95": 10.0
+        },
+        "wind_speed_raw": {
+          "non_null_count": 156,
+          "unique_count": 4,
+          "sample_values": [
+            "0 mph",
+            "10 mph",
+            "15 mph",
+            "5 mph"
+          ]
+        }
+      },
+      "range_violations": [],
+      "null_rates": {
+        "end_time_utc": 0.0,
+        "grid_id": 0.0,
+        "is_daytime": 0.0,
+        "probability_of_precipitation": 0.0,
+        "short_forecast": 0.0,
+        "start_time_utc": 0.0,
+        "temperature_f": 0.0,
+        "wind_speed_mph": 0.0,
+        "wind_speed_raw": 0.0
+      },
+      "range_violations_count": 0,
+      "quality_pass": true
+    },
+    "noaa_obs": {
+      "row_count": 500,
+      "unique_sources": [
+        "noaa_phoenix_obs"
+      ],
+      "columns": {
+        "barometric_pressure_pa": {
+          "non_null_count": 500,
+          "min": 100948.24,
+          "max": 101560.0,
+          "mean": 101201.0666,
+          "median": 101219.16,
+          "stdev": 170.8081,
+          "p5": 100982.11,
+          "p25": 101049.84,
+          "p75": 101320.75,
+          "p95": 101523.93
+        },
+        "dewpoint_c": {
+          "non_null_count": 500,
+          "min": -13.0,
+          "max": 2.2,
+          "mean": -6.5634,
+          "median": -8.0,
+          "stdev": 4.2771,
+          "p5": -12.0,
+          "p25": -10.0,
+          "p75": -2.0,
+          "p95": 1.0
+        },
+        "heat_index_c": {
+          "non_null_count": 408,
+          "min": 20.2688,
+          "max": 29.8702,
+          "mean": 25.8001,
+          "median": 26.2373,
+          "stdev": 2.5834,
+          "p5": 20.5874,
+          "p25": 24.0601,
+          "p75": 28.2649,
+          "p95": 29.0547
+        },
+        "relative_humidity_pct": {
+          "non_null_count": 500,
+          "min": 5.2731,
+          "max": 23.5238,
+          "mean": 12.1765,
+          "median": 12.7087,
+          "stdev": 4.8213,
+          "p5": 5.5791,
+          "p25": 7.4745,
+          "p75": 14.5721,
+          "p95": 20.2229
+        },
+        "station": {
+          "non_null_count": 500,
+          "unique_count": 1,
+          "sample_values": [
+            "KPHX"
+          ]
+        },
+        "temperature_c": {
+          "non_null_count": 500,
+          "min": 16.7,
+          "max": 33.0,
+          "mean": 25.952,
+          "median": 26.0,
+          "stdev": 4.3603,
+          "p5": 18.0,
+          "p25": 23.0,
+          "p75": 29.0,
+          "p95": 32.0
+        },
+        "text_description": {
+          "non_null_count": 441,
+          "unique_count": 3,
+          "sample_values": [
+            "Clear",
+            "Mostly Clear",
+            "Partly Cloudy"
+          ]
+        },
+        "timestamp_utc": {
+          "non_null_count": 500,
+          "unique_count": 500,
+          "sample_values": [
+            "2026-04-17T16:35:00+00:00",
+            "2026-04-17T16:40:00+00:00",
+            "2026-04-17T16:45:00+00:00",
+            "2026-04-17T16:50:00+00:00",
+            "2026-04-17T16:51:00+00:00",
+            "2026-04-17T16:55:00+00:00",
+            "2026-04-17T17:00:00+00:00",
+            "2026-04-17T17:05:00+00:00",
+            "2026-04-17T17:10:00+00:00",
+            "2026-04-17T17:15:00+00:00"
+          ]
+        },
+        "visibility_m": {
+          "non_null_count": 500,
+          "min": 16090.0,
+          "max": 16093.44,
+          "mean": 16093.1717,
+          "median": 16093.44,
+          "stdev": 0.9234,
+          "p5": 16090.0,
+          "p25": 16093.44,
+          "p75": 16093.44,
+          "p95": 16093.44
+        },
+        "wind_direction_deg": {
+          "non_null_count": 465,
+          "min": 0.0,
+          "max": 360.0,
+          "mean": 194.6237,
+          "median": 240.0,
+          "stdev": 101.2355,
+          "p5": 0.0,
+          "p25": 100.0,
+          "p75": 260.0,
+          "p95": 300.0
+        },
+        "wind_speed_kph": {
+          "non_null_count": 468,
+          "min": 0.0,
+          "max": 24.084,
+          "mean": 10.0028,
+          "median": 9.252,
+          "stdev": 5.391,
+          "p5": 0.0,
+          "p25": 7.416,
+          "p75": 12.96,
+          "p95": 20.376
+        }
+      },
+      "range_violations": [],
+      "null_rates": {
+        "barometric_pressure_pa": 0.0,
+        "dewpoint_c": 0.0,
+        "heat_index_c": 0.184,
+        "relative_humidity_pct": 0.0,
+        "station": 0.0,
+        "temperature_c": 0.0,
+        "text_description": 0.118,
+        "timestamp_utc": 0.0,
+        "visibility_m": 0.0,
+        "wind_direction_deg": 0.07,
+        "wind_speed_kph": 0.064
+      },
+      "range_violations_count": 0,
+      "quality_pass": true
+    }
+  },
+  "total_pass": 16578,
+  "total_fail": 0,
+  "overall_quality_pct": 100.0
+}
