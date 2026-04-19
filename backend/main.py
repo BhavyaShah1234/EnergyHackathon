@@ -26,12 +26,14 @@ from backend.ingest.eia_gas import fetch_gas_prices
 from backend.ingest.caiso_lmp import fetch_all_nodes
 from backend.ingest.eia_demand import fetch_all_bas
 from backend.ingest.gridstatus import fetch_ercot_snapshot
+from backend.ingest.cache import set_live_gas_prices, set_live_lmp, cache_status
 from backend.scoring.engine import score_all, score_site
 from backend.scoring.sub_b import GAS_HUB_PRICES
+from backend.scoring.power import HEAT_RATE as PWR_HEAT_RATE, OM_COST as PWR_OM_COST
 from backend.pipeline.runner import run_pipeline
 from backend.pipeline.evaluate import (
-    evaluate_coordinate, stream_narration,
-    get_cached_regime, set_cached_regime,
+    evaluate_coordinate, evaluate_coordinate_enriched,
+    stream_narration, get_cached_regime, set_cached_regime,
 )
 from backend.scoring.regime import classify_regime
 
@@ -44,16 +46,32 @@ _news_cache: dict = {"items": [], "fetched_at": ""}
 # ── Background jobs ────────────────────────────────────────────────────────
 
 async def _refresh_regime():
+    """Refresh market regime + cache live LMP and gas prices every 5 min."""
+    # GridStatus: live ERCOT LMP + fuel mix
     snapshot = await fetch_ercot_snapshot(settings.gridstatus_api_key)
-    fm = snapshot['fuel_mix']
+    fm  = snapshot['fuel_mix']
     lmp = snapshot['lmp']
     lmp_mean = sum(lmp.values()) / max(len(lmp), 1)
+
     regime = classify_regime(
         lmp_mean=lmp_mean, lmp_std=lmp_mean * 0.25,
         wind_pct=fm.get('wind', 0.28),
         demand_mw=55000, reserve_margin=0.18,
     )
     set_cached_regime(regime)
+
+    # Cache live LMP for use in extract_features()
+    set_live_lmp(lmp)
+
+    # EIA: live gas prices (Henry Hub → Waha derivation)
+    try:
+        gas = await fetch_gas_prices(settings.eia_api_key)
+        set_live_gas_prices(
+            waha=gas.get('waha_hub', 1.84),
+            henry=gas.get('henry_hub', 3.41),
+        )
+    except Exception:
+        pass  # keep previous cached value
 
 
 async def _refresh_news():
@@ -147,29 +165,37 @@ class OptimizeRequest(BaseModel):
 
 # ── Helpers ────────────────────────────────────────────────────────────────
 
-def _build_response(s, waha: float | None) -> ScoreResponse:
-    gp = waha if s.site.gas_hub == "Waha" else GAS_HUB_PRICES.get(s.site.gas_hub, 3.41)
+def _build_site_response(site, sc, rank: int = 0) -> ScoreResponse:
+    """Build a ScoreResponse using System B (ML+TOPSIS) scorecard data."""
+    # Use hub-appropriate gas price for display; BTM economics always use Waha (per model)
+    gas_price_display = sc.live_gas_price if site.gas_hub == "Waha" else GAS_HUB_PRICES.get(site.gas_hub, 3.41)
+    btm_cost_display = round(gas_price_display * PWR_HEAT_RATE + PWR_OM_COST, 2)
     return ScoreResponse(
-        id=s.site.id,
-        name=s.site.name,
-        location=s.site.location,
-        state=s.site.state,
-        market=s.site.market,
-        lat=s.site.lat,
-        lng=s.site.lng,
-        acres=s.site.acres,
-        land_cost_per_acre=s.site.land_cost_per_acre,
-        fiber_km=s.site.fiber_km,
-        water_km=s.site.water_km,
-        pipeline_km=s.site.pipeline_km,
-        gas_hub=s.site.gas_hub,
-        gas_price=gp,
-        lmp_node=s.site.lmp_node,
-        lmp=s.site.lmp,
-        est_power_cost_mwh=s.est_power_cost_mwh,
-        total_land_cost_m=round(s.site.acres * s.site.land_cost_per_acre / 1_000_000, 2),
-        scores={"subA": s.sub_a, "subB": s.sub_b, "subC": s.sub_c, "composite": s.composite},
-        rank=s.rank,
+        id=site.id,
+        name=site.name,
+        location=site.location,
+        state=site.state,
+        market=site.market,
+        lat=site.lat,
+        lng=site.lng,
+        acres=site.acres,
+        land_cost_per_acre=site.land_cost_per_acre,
+        fiber_km=site.fiber_km,
+        water_km=site.water_km,
+        pipeline_km=site.pipeline_km,
+        gas_hub=site.gas_hub,
+        gas_price=round(gas_price_display, 2),
+        lmp_node=site.lmp_node,
+        lmp=site.lmp,
+        est_power_cost_mwh=btm_cost_display,
+        total_land_cost_m=round(site.acres * site.land_cost_per_acre / 1_000_000, 2),
+        scores={
+            "land": round(sc.land_score, 4),
+            "gas": round(sc.gas_score, 4),
+            "power": round(sc.power_score, 4),
+            "composite": round(sc.composite_score, 4),
+        },
+        rank=rank,
     )
 
 
@@ -190,27 +216,42 @@ async def health() -> dict:
 
 @app.get("/api/sites", response_model=list[ScoreResponse])
 async def get_sites():
-    """Return all candidate sites ranked by composite score using live market inputs."""
-    gas_data, lmp_data = await _fetch_market_inputs(settings.eia_api_key)
-    waha     = gas_data.get("waha_hub")
-    palo_lmp = lmp_data.get("PALOVRDE_ASR-APND", {}).get("lmp_mwh")
+    """Return candidate sites with enriched System B scoring, identical to /api/evaluate click-through.
 
-    scored = score_all(live_gas_price=waha, live_lmp=palo_lmp)
-    return [_build_response(s, waha) for s in scored]
+    Uses the same evaluate_coordinate_enriched() path as the side panel so popup and panel
+    scores always match. Web context is cached at 0.5° resolution so only the first request
+    per grid cell makes external API calls.
+    """
+    scorecards = await asyncio.gather(*[
+        evaluate_coordinate_enriched(
+            s.lat, s.lng,
+            tavily_key=settings.tavily_api_key,
+            anthropic_key=settings.anthropic_api_key,
+        )
+        for s in CANDIDATE_SITES
+    ])
+    responses = [
+        _build_site_response(site, sc)
+        for site, sc in zip(CANDIDATE_SITES, scorecards)
+    ]
+    responses.sort(key=lambda r: r.scores["composite"], reverse=True)
+    for i, r in enumerate(responses):
+        r.rank = i + 1
+    return responses
 
 
 @app.get("/api/sites/{site_id}", response_model=ScoreResponse)
 async def get_site(site_id: str):
-    """Return scored detail for a single candidate site."""
+    """Return System B scored detail for a single candidate site."""
     site = next((s for s in CANDIDATE_SITES if s.id == site_id), None)
     if not site:
         raise HTTPException(status_code=404, detail=f"Site '{site_id}' not found")
-
-    gas_data, lmp_data = await _fetch_market_inputs(settings.eia_api_key)
-    waha     = gas_data.get("waha_hub")
-    palo_lmp = lmp_data.get("PALOVRDE_ASR-APND", {}).get("lmp_mwh")
-    s        = score_site(site, waha, palo_lmp)
-    return _build_response(s, waha)
+    sc = await evaluate_coordinate_enriched(
+        site.lat, site.lng,
+        tavily_key=settings.tavily_api_key,
+        anthropic_key=settings.anthropic_api_key,
+    )
+    return _build_site_response(site, sc, rank=1)
 
 
 @app.get("/api/market", response_model=MarketResponse)
@@ -235,7 +276,14 @@ async def trigger_pipeline() -> dict:
 @app.post("/api/evaluate")
 async def api_evaluate(req: EvaluateRequest):
     async def generate():
-        sc = evaluate_coordinate(req.lat, req.lon, req.weights)
+        # Use enriched async path: Tavily + Claude web context runs concurrently
+        # with ML scoring. Falls back gracefully when API keys missing.
+        sc = await evaluate_coordinate_enriched(
+            req.lat, req.lon, req.weights,
+            tavily_key=settings.tavily_api_key,
+            anthropic_key=settings.anthropic_api_key,
+        )
+
         payload = {
             "lat": sc.lat, "lon": sc.lon,
             "hard_disqualified": sc.hard_disqualified,
@@ -246,6 +294,8 @@ async def api_evaluate(req: EvaluateRequest):
             "spread_p50_mwh": sc.spread_p50_mwh,
             "spread_durability": sc.spread_durability,
             "regime": sc.regime, "regime_proba": sc.regime_proba,
+            "live_gas_price": sc.live_gas_price,
+            "live_lmp_mwh": sc.live_lmp_mwh,
             "cost": {
                 "land_acquisition_m": sc.cost.land_acquisition_m if sc.cost else 0,
                 "pipeline_connection_m": sc.cost.pipeline_connection_m if sc.cost else 0,
@@ -257,6 +307,17 @@ async def api_evaluate(req: EvaluateRequest):
             } if sc.cost else None,
         }
         yield {"event": "scorecard", "data": json.dumps(payload)}
+
+        # Emit web context event when real Tavily data was fetched
+        if sc.web_fetched:
+            web_payload = {
+                "land_adjustment":    sc.web_land_adjustment,
+                "pipeline_score":     sc.web_pipeline_score,
+                "land_reasoning":     sc.web_land_reasoning,
+                "pipeline_reasoning": sc.web_pipeline_reasoning,
+                "sources":            sc.web_sources[:5],
+            }
+            yield {"event": "web_context", "data": json.dumps(web_payload)}
 
         if not sc.hard_disqualified:
             async for chunk in stream_narration(sc, settings.anthropic_api_key):
@@ -299,11 +360,35 @@ async def api_optimize(req: OptimizeRequest):
                 if sc.composite_score < req.min_composite:
                     await asyncio.sleep(0)
                     continue
+                # Apply gas/power cost filters (previously dead code — now active)
+                btm_cost = sc.live_gas_price * PWR_HEAT_RATE + PWR_OM_COST
+                if req.gas_price_max is not None and sc.live_gas_price > req.gas_price_max:
+                    await asyncio.sleep(0)
+                    continue
+                if req.power_cost_max is not None and btm_cost > req.power_cost_max:
+                    await asyncio.sleep(0)
+                    continue
                 candidates.append(sc)
                 await asyncio.sleep(0)
 
         candidates.sort(key=lambda s: s.composite_score, reverse=True)
-        for sc in candidates[:req.max_sites]:
+        top_raw = candidates[:req.max_sites]
+
+        # Enrich top candidates with web context so scores match /api/evaluate click-through
+        if top_raw:
+            enriched = await asyncio.gather(*[
+                evaluate_coordinate_enriched(
+                    sc.lat, sc.lon, req.weights,
+                    tavily_key=settings.tavily_api_key,
+                    anthropic_key=settings.anthropic_api_key,
+                )
+                for sc in top_raw
+            ])
+            top_final = sorted(enriched, key=lambda s: s.composite_score, reverse=True)
+        else:
+            top_final = top_raw
+
+        for sc in top_final:
             payload = {
                 "lat": sc.lat, "lon": sc.lon,
                 "composite_score": sc.composite_score,
@@ -369,32 +454,30 @@ VALID_LAYERS = {'composite', 'gas', 'lmp'}
 
 @app.get("/api/heatmap")
 async def api_heatmap(layer: str = "composite", bounds: str = "", zoom: int = 8):
-    """Return GeoJSON FeatureCollection of scored points for a map heat layer."""
+    """Return GeoJSON FeatureCollection of System B scored points for a map heat layer."""
     if layer not in VALID_LAYERS:
         return {"type": "FeatureCollection", "features": []}
 
-    gas_data, lmp_data = await _fetch_market_inputs(settings.eia_api_key)
-    waha     = gas_data.get("waha_hub")
-    palo_lmp = lmp_data.get("PALOVRDE_ASR-APND", {}).get("lmp_mwh")
-    scored   = score_all(live_gas_price=waha, live_lmp=palo_lmp)
-
+    scorecards = await asyncio.gather(
+        *[asyncio.to_thread(evaluate_coordinate, s.lat, s.lng) for s in CANDIDATE_SITES]
+    )
     score_key = {
-        'composite': lambda s: s.composite,
-        'gas':       lambda s: s.sub_b,
-        'lmp':       lambda s: min(max(s.sub_c, 0.0), 1.0),
+        'composite': lambda sc: sc.composite_score,
+        'gas':       lambda sc: sc.gas_score,
+        'lmp':       lambda sc: sc.power_score,
     }[layer]
 
     features = [
         {
             "type": "Feature",
-            "geometry": {"type": "Point", "coordinates": [s.site.lng, s.site.lat]},
+            "geometry": {"type": "Point", "coordinates": [site.lng, site.lat]},
             "properties": {
-                "score": round(score_key(s), 4),
+                "score": round(score_key(sc), 4),
                 "layer": layer,
-                "name": s.site.name,
+                "name": site.name,
             },
         }
-        for s in scored
+        for site, sc in zip(CANDIDATE_SITES, scorecards)
     ]
     return {"type": "FeatureCollection", "features": features}
 
@@ -423,9 +506,16 @@ async def api_compare(coords: str):
     if len(pairs) > 5:
         raise HTTPException(status_code=422, detail="Maximum 5 coordinates per compare request")
 
+    scorecards = await asyncio.gather(*[
+        evaluate_coordinate_enriched(
+            lat, lon,
+            tavily_key=settings.tavily_api_key,
+            anthropic_key=settings.anthropic_api_key,
+        )
+        for lat, lon in pairs
+    ])
     results = []
-    for lat, lon in pairs:
-        sc = evaluate_coordinate(lat, lon)
+    for sc in scorecards:
         results.append({
             "lat": sc.lat, "lon": sc.lon,
             "composite_score": sc.composite_score,
@@ -455,6 +545,16 @@ async def api_compare(coords: str):
 @app.get("/api/news")
 async def api_news():
     return _news_cache
+
+
+@app.get("/api/cache/status")
+async def api_cache_status():
+    """Return current state of live-price and regime caches (observability endpoint)."""
+    regime = get_cached_regime()
+    return {
+        "prices": cache_status(),
+        "regime": {"label": regime.label, "proba": regime.proba},
+    }
 
 
 class AgentRequest(BaseModel):

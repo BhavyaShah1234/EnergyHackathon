@@ -1,0 +1,24 @@
+{
+  "generated_at_utc": "2026-04-19T10:06:10.713688+00:00",
+  "output_dir": "/Users/suhasreddy/EnergyHackathon/data/training/distribution_handoff_20260419T100610Z",
+  "datasets": {
+    "usgs_seismic": {
+      "row_count": 16722,
+      "csv": "usgs_seismic.csv",
+      "parquet": "usgs_seismic.parquet",
+      "error": null
+    },
+    "fema_nri_wildfire": {
+      "row_count": 9260,
+      "csv": "fema_nri_wildfire.csv",
+      "parquet": "fema_nri_wildfire.parquet",
+      "error": null
+    }
+  },
+  "blocked_or_missing": {
+    "phmsa_incidents": "Official PHMSA bulk download returned HTTP 403 during automation.",
+    "phmsa_annual_reports": "Official PHMSA bulk download returned HTTP 403 during automation.",
+    "eia_176_757": "Official EIA query-system direct bulk path not wired yet.",
+    "waha_history": "Current EIA API series config does not return Waha spot history."
+  }
+}

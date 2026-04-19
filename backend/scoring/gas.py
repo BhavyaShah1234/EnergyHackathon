@@ -79,6 +79,7 @@ def score_gas(
     incident_density: float,
     interstate_pipeline_km: float,
     waha_distance_km: float,
+    pipeline_web_score: float | None = None,
 ) -> float:
     """Return gas reliability score 0–1.
 
@@ -87,6 +88,9 @@ def score_gas(
         incident_density: PHMSA fallback density when KDE not available
         interstate_pipeline_km: distance to nearest interstate pipeline
         waha_distance_km: distance to Waha Hub
+        pipeline_web_score: [0,1] operator reliability from Tavily+Claude web
+            context (None = not available, skip). When provided, blended in
+            at 20% weight and the other three weights are scaled to 80%.
     """
     kde = _load_kde_model()
     global _KDE_SCORE_WARNED
@@ -94,7 +98,7 @@ def score_gas(
         try:
             log_density = float(kde.score_samples([[lat, lon]])[0])
             # log_density is negative; higher (less negative) = denser incidents = lower reliability
-            # Normalize: typical range is [-15, -3]; map to incident_score in [0, 1]
+            # Normalize: typical range [-15, -3] → incident_score [0, 1]
             incident_score = max(0.0, min(1.0, 1.0 - (log_density + 15) / 12.0))
         except Exception as exc:
             incident_score = max(0.0, 1.0 - min(incident_density * 200, 1.0))
@@ -107,9 +111,18 @@ def score_gas(
     pipeline_score = max(0.0, 1.0 - interstate_pipeline_km / 100.0)
     waha_score     = max(0.0, 1.0 - waha_distance_km / 400.0)
 
-    raw = (
-        incident_score * _INCIDENT_WEIGHT +
-        pipeline_score * _PIPELINE_WEIGHT +
-        waha_score     * _WAHA_WEIGHT
-    )
+    if pipeline_web_score is not None:
+        # Web context adds a 4th component at 20%; scale base weights to 80%
+        raw = (
+            incident_score  * _INCIDENT_WEIGHT * 0.80 +
+            pipeline_score  * _PIPELINE_WEIGHT * 0.80 +
+            waha_score      * _WAHA_WEIGHT     * 0.80 +
+            pipeline_web_score                 * 0.20
+        )
+    else:
+        raw = (
+            incident_score * _INCIDENT_WEIGHT +
+            pipeline_score * _PIPELINE_WEIGHT +
+            waha_score     * _WAHA_WEIGHT
+        )
     return round(min(max(raw, 0.0), 1.0), 4)

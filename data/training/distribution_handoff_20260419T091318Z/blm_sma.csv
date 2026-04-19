@@ -1,0 +1,130 @@
+_source,admin_agency,admin_department,admin_state,admin_unit_name,admin_unit_type,dataset,object_id,shape_area_sq_deg,sma_id
+blm_sma,UND,UND,AZ,,,blm_sma,1,449689228.9533807,1
+blm_sma,UND,UND,AZ,,,blm_sma,2,5555178.166579192,1
+blm_sma,UND,UND,AZ,Undetermined,,blm_sma,3,36856.321932387575,1
+blm_sma,UND,UND,AZ,,,blm_sma,4,91336637.47506332,1
+blm_sma,UND,UND,AZ,,,blm_sma,5,793789457.3549464,1
+blm_sma,UND,UND,AZ,,,blm_sma,6,293678.8314629938,1
+blm_sma,UND,UND,NM,,,blm_sma,16,1485159607201.1099,1
+blm_sma,BLM,DOI,AZ,Bureau of Land Management,Bureau of Land Management AZ,blm_sma,21,489734597.6436786,2
+blm_sma,BLM,DOI,AZ,Bureau of Land Management,Bureau of Land Management AZ,blm_sma,22,72065839865.76056,2
+blm_sma,BLM,DOI,NM,Bureau of Land Management,Bureau of Land Management NM,blm_sma,28,74574013233.83418,2
+blm_sma,BIA,DOI,AZ,,,blm_sma,53,1487633214.4945414,3
+blm_sma,BIA,DOI,AZ,,,blm_sma,54,38889840.794222,3
+blm_sma,BIA,DOI,AZ,,,blm_sma,55,1453023588.6533482,3
+blm_sma,BIA,DOI,AZ,,,blm_sma,56,139445420.97786725,3
+blm_sma,BIA,DOI,AZ,,,blm_sma,57,1070099131.9231787,3
+blm_sma,BIA,DOI,AZ,,,blm_sma,58,6300917468.447907,3
+blm_sma,BIA,DOI,AZ,,,blm_sma,59,10031832165.820665,3
+blm_sma,BIA,DOI,AZ,,,blm_sma,60,2460067.528824297,3
+blm_sma,BIA,DOI,AZ,,,blm_sma,61,402974595.3819963,3
+blm_sma,BIA,DOI,AZ,,,blm_sma,62,121581313.70115818,3
+blm_sma,BIA,DOI,AZ,,,blm_sma,63,146207196.73384574,3
+blm_sma,BIA,DOI,AZ,,,blm_sma,64,2176756165.082455,3
+blm_sma,BIA,DOI,AZ,,,blm_sma,65,317686987.64531183,3
+blm_sma,BIA,DOI,AZ,,,blm_sma,66,10742418910.670122,3
+blm_sma,BIA,DOI,AZ,,,blm_sma,67,766589284.9611783,3
+blm_sma,BIA,DOI,AZ,,,blm_sma,68,8233260.066172357,3
+blm_sma,BIA,DOI,AZ,,,blm_sma,69,3999986.104972316,3
+blm_sma,BIA,DOI,AZ,,,blm_sma,70,12802449.063094033,3
+blm_sma,BIA,DOI,AZ,,,blm_sma,71,4100762.7792715146,3
+blm_sma,BIA,DOI,AZ,,,blm_sma,72,82415193.65185216,3
+blm_sma,BIA,DOI,AZ,,,blm_sma,73,61689411933.30397,3
+blm_sma,BIA,DOI,AZ,,,blm_sma,74,180610324.51094434,3
+blm_sma,BIA,DOI,AZ,,,blm_sma,75,268789815.8666626,3
+blm_sma,BIA,DOI,AZ,,,blm_sma,76,37980249.83940375,3
+blm_sma,BIA,DOI,AZ,,,blm_sma,77,137358485.21324956,3
+blm_sma,BIA,DOI,AZ,,,blm_sma,78,199082550.36652833,3
+blm_sma,BIA,DOI,AZ,,,blm_sma,79,15701936221.855923,3
+blm_sma,BIA,DOI,AZ,,,blm_sma,80,2247007.8899904364,3
+blm_sma,BIA,DOI,AZ,,,blm_sma,81,9934700307.215479,3
+blm_sma,BIA,DOI,NM,,,blm_sma,142,51038474414.15196,3
+blm_sma,BIA,DOI,NM,Alabama and Coushatta Reservation,American Indian Reservation,blm_sma,143,25414635.392581284,3
+blm_sma,BIA,DOI,NM,Iowa Reservation,American Indian Reservation,blm_sma,144,60532172.809695475,3
+blm_sma,BIA,DOI,NM,Jicarilla Apache Reservation,American Indian Reservation,blm_sma,145,69.83760644273553,3
+blm_sma,BIA,DOI,NM,Kickapoo Reservation (Kansas),American Indian Reservation,blm_sma,146,130591209.18599221,3
+blm_sma,BIA,DOI,NM,Navajo Reservation,American Indian Reservation,blm_sma,147,636305.5405257655,3
+blm_sma,BIA,DOI,NM,Osage Reservation,American Indian Reservation,blm_sma,148,794335.5778093643,3
+blm_sma,BIA,DOI,NM,Potawatomi (Kansas) Reservation,American Indian Reservation,blm_sma,149,520834277.1048436,3
+blm_sma,BIA,DOI,NM,Sac and Fox (KS-NE) Reservation,American Indian Reservation,blm_sma,150,33804322.26163486,3
+blm_sma,BIA,DOI,NM,Southern Ute Reservation,American Indian Reservation,blm_sma,151,13650.134288035188,3
+blm_sma,BIA,DOI,NM,Ute Mountain Reservation,American Indian Reservation,blm_sma,152,9922.173070734167,3
+blm_sma,BIA,DOI,NM,Zuni Reservation,American Indian Reservation,blm_sma,153,24081.25598628994,3
+blm_sma,BIA,DOI,NM,,,blm_sma,274,3054855639.0286603,3
+blm_sma,BIA,DOI,NM,Fort Sill,Army Base,blm_sma,275,1871232.6938022238,3
+blm_sma,BIA,DOI,NM,Osage Reservation,American Indian Reservation,blm_sma,276,8497865887.598097,3
+blm_sma,USAF,DOD,AZ,,,blm_sma,280,10129202727.987068,305
+blm_sma,USAF,DOD,AZ,,,blm_sma,281,60832927.60184439,305
+blm_sma,USAF,DOD,AZ,,,blm_sma,282,19061677.0548994,305
+blm_sma,ARMY,DOD,AZ,,,blm_sma,331,1282782.0930372418,488
+blm_sma,ARMY,DOD,AZ,,,blm_sma,332,445334345.12946767,488
+blm_sma,ARMY,DOD,AZ,,,blm_sma,333,172555011.9242714,488
+blm_sma,ARMY,DOD,AZ,,,blm_sma,334,4792852535.321312,488
+blm_sma,ARMY,DOD,AZ,,,blm_sma,335,154600713.7368502,488
+blm_sma,USDA,USDA,NM,,,blm_sma,393,626185244.5538447,914
+blm_sma,USFS,USDA,AZ,,,blm_sma,398,11897723784.396017,915
+blm_sma,USFS,USDA,AZ,,,blm_sma,399,11088611486.804014,915
+blm_sma,USFS,USDA,AZ,,,blm_sma,400,9321230927.908241,915
+blm_sma,USFS,USDA,AZ,,,blm_sma,401,9556790498.550531,915
+blm_sma,USFS,USDA,AZ,,,blm_sma,402,7544082387.056193,915
+blm_sma,USFS,USDA,AZ,,,blm_sma,403,16870697832.31474,915
+blm_sma,USFS,USDA,NM,,,blm_sma,461,75978315941.14984,915
+blm_sma,FWS,DOI,AZ,,,blm_sma,499,2398782.844925937,1535
+blm_sma,FWS,DOI,AZ,,,blm_sma,500,27496056.36559512,1535
+blm_sma,FWS,DOI,AZ,,,blm_sma,501,38772448.46694683,1535
+blm_sma,FWS,DOI,AZ,,,blm_sma,502,39819754.2322818,1535
+blm_sma,FWS,DOI,AZ,,,blm_sma,503,39840567.550228365,1535
+blm_sma,FWS,DOI,AZ,,,blm_sma,504,67864323.3777965,1535
+blm_sma,FWS,DOI,AZ,,,blm_sma,505,232834524.94261774,1535
+blm_sma,FWS,DOI,AZ,,,blm_sma,506,111223575.86740059,1535
+blm_sma,FWS,DOI,AZ,,,blm_sma,507,3855938054.4305005,1535
+blm_sma,FWS,DOI,AZ,,,blm_sma,508,4856571928.116397,1535
+blm_sma,FWS,DOI,AZ,,,blm_sma,509,657332791.7697412,1535
+blm_sma,FWS,DOI,AZ,,,blm_sma,510,15534237.135283278,1535
+blm_sma,FWS,DOI,AZ,,,blm_sma,511,13155826.168289348,1535
+blm_sma,FWS,DOI,NM,,,blm_sma,745,7253407029.485087,1535
+blm_sma,DOE,DOE,NM,,,blm_sma,788,288122821.93158436,1542
+blm_sma,NPS,DOI,AZ,,,blm_sma,800,291732017.9792412,2012
+blm_sma,NPS,DOI,AZ,,,blm_sma,801,252891.80586502544,2012
+blm_sma,NPS,DOI,AZ,,,blm_sma,802,574350855.93893,2012
+blm_sma,NPS,DOI,AZ,,,blm_sma,803,983389.7543583647,2012
+blm_sma,NPS,DOI,AZ,,,blm_sma,804,2274173.1420272286,2012
+blm_sma,NPS,DOI,AZ,,,blm_sma,805,18541201.852651183,2012
+blm_sma,NPS,DOI,AZ,,,blm_sma,806,217110131.34423035,2012
+blm_sma,NPS,DOI,AZ,,,blm_sma,807,7475697474.676679,2012
+blm_sma,NPS,DOI,AZ,,,blm_sma,808,4113205521.1355453,2012
+blm_sma,NPS,DOI,AZ,,,blm_sma,809,858627483.81632,2012
+blm_sma,NPS,DOI,AZ,,,blm_sma,810,2730079.1068932023,2012
+blm_sma,NPS,DOI,AZ,,,blm_sma,811,69077215.93433966,2012
+blm_sma,NPS,DOI,AZ,,,blm_sma,812,23312914.480879217,2012
+blm_sma,NPS,DOI,AZ,,,blm_sma,813,5628624.535733526,2012
+blm_sma,NPS,DOI,AZ,,,blm_sma,814,5962154.492287463,2012
+blm_sma,NPS,DOI,AZ,,,blm_sma,815,1858078826.4036946,2012
+blm_sma,NPS,DOI,AZ,,,blm_sma,816,506192303.1808272,2012
+blm_sma,NPS,DOI,AZ,,,blm_sma,817,6566605.453211977,2012
+blm_sma,NPS,DOI,AZ,,,blm_sma,818,2027591.903855197,2012
+blm_sma,NPS,DOI,AZ,,,blm_sma,819,2222097.9497248232,2012
+blm_sma,NPS,DOI,AZ,,,blm_sma,820,17996872.52335085,2012
+blm_sma,NPS,DOI,NM,,,blm_sma,902,9708561857.488726,2012
+blm_sma,DOD,DOD,AZ,,,blm_sma,933,59666025.200075515,2365
+blm_sma,DOD,DOD,NM,,,blm_sma,938,32521070832.216026,2365
+blm_sma,USBR,DOI,AZ,,,blm_sma,946,82409034.41515572,2366
+blm_sma,USBR,DOI,AZ,,,blm_sma,947,19128.3095957096,2366
+blm_sma,USBR,DOI,AZ,,,blm_sma,948,1178098.2402678074,2366
+blm_sma,USBR,DOI,AZ,,,blm_sma,949,1419834929.0165677,2366
+blm_sma,USBR,DOI,NM,,,blm_sma,953,1483217109.924112,2366
+blm_sma,USACE,DOD,AZ,,,blm_sma,963,131683534.26264942,2367
+blm_sma,NAVY,DOD,AZ,,,blm_sma,981,17613708.710710756,2371
+blm_sma,OTHFE,OTHFE,AZ,Other Federal Agencies,,blm_sma,1006,13787964.614895787,2378
+blm_sma,OTHFE,OTHFE,NM,,,blm_sma,1009,9306306.487148501,2378
+blm_sma,ST,ST,AZ,,,blm_sma,1014,14862642.420049137,2386
+blm_sma,ST,ST,AZ,,,blm_sma,1015,54346123531.24445,2386
+blm_sma,ST,ST,AZ,,,blm_sma,1016,31848.870777443684,2386
+blm_sma,ST,ST,NM,,,blm_sma,1020,93875375948.4355,2386
+blm_sma,LG,LG,AZ,,,blm_sma,1040,676554.3768642836,2387
+blm_sma,LG,LG,AZ,,,blm_sma,1041,142619298.35326284,2387
+blm_sma,PVT,PVT,AZ,,,blm_sma,1054,1505787.4372590866,2388
+blm_sma,PVT,PVT,AZ,,,blm_sma,1055,74127260375.12085,2388
+blm_sma,PVT,PVT,NM,,,blm_sma,1060,203339353079.935,2388
+blm_sma,FAA,DOT,AZ,,,blm_sma,1099,868025.7404387959,4893
+blm_sma,BOP,DOJ,AZ,,,blm_sma,1110,1475840.8550536567,5136

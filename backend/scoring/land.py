@@ -1,7 +1,7 @@
 """Land & Lease Viability scorer for arbitrary coordinates.
 
 Baseline: rule-based weighted formula with SHAP-style per-feature attribution.
-Upgrade: loads LightGBM model from data/models/land_lgbm.pkl when available.
+Upgrade: loads scikit-learn Random Forest from data/models/land_rf.pkl when available.
 """
 import logging
 import warnings
@@ -30,7 +30,7 @@ assert abs(sum(_WEIGHTS.values()) - 1.0) < 0.001
 _FEMA_SCORES = {'X': 1.0, 'X500': 0.7, 'D': 0.4, 'A': 0.0, 'AE': 0.0, 'V': 0.0}
 _OWNERSHIP_SCORES = {'private': 1.0, 'state': 0.6, 'blm_federal': 0.3}
 
-_MODEL_PATH = Path('data/models/land_lgbm.pkl')
+_MODEL_PATH = Path('data/models/land_rf.pkl')
 _LOGGER = logging.getLogger(__name__)
 _MODEL_BUNDLE = None
 _EXPLAINER = None
@@ -135,11 +135,16 @@ def score_land(fv: FeatureVector) -> tuple[float, dict[str, float]]:
                             category=UserWarning,
                         )
                         shap_values = explainer.shap_values(X)
-                    if isinstance(shap_values, list):
-                        idx = 1 if len(shap_values) > 1 else 0
-                        sv = shap_values[idx][0]
+                    import numpy as _np
+                    sv_raw = _np.array(shap_values) if not isinstance(shap_values, list) else shap_values
+                    if isinstance(sv_raw, list):
+                        # Old shap: list[neg_class, pos_class], each shape (n, features)
+                        sv = sv_raw[1][0] if len(sv_raw) > 1 else sv_raw[0][0]
+                    elif sv_raw.ndim == 3:
+                        # shap 0.51+: (n_samples, n_features, n_classes) — take pos class
+                        sv = sv_raw[0, :, 1]
                     else:
-                        sv = shap_values[0]
+                        sv = sv_raw[0]
                     shap = {k: round(float(v), 5) for k, v in zip(keys, sv)}
                 except Exception as exc:
                     if not _LAND_SHAP_WARNED:

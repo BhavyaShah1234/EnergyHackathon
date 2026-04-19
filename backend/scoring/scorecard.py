@@ -34,3 +34,15 @@ class SiteScorecard:
 
     cost: CostEstimate | None = None
     narrative: str = ""              # filled by Claude stream
+
+    # Web context enrichment (Tavily + Claude, populated by evaluate_coordinate_enriched)
+    web_land_adjustment: float = 0.0    # [-0.10, +0.10] applied to land_score
+    web_pipeline_score:  float | None = None  # [0, 1] operator reliability
+    web_land_reasoning:     str = ""
+    web_pipeline_reasoning: str = ""
+    web_sources: list = field(default_factory=list)
+    web_fetched: bool = False           # True = real Tavily data used
+
+    # Live market data provenance
+    live_gas_price:  float = 0.0    # $/MMBtu Waha Hub (from EIA)
+    live_lmp_mwh:    float = 0.0    # $/MWh at nearest ERCOT hub (from GridStatus)

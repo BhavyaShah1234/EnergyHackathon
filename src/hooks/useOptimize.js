@@ -44,7 +44,7 @@ export function useOptimize() {
           if (line.startsWith('data: ') && event) {
             const d = JSON.parse(line.slice(6).trim())
             if (event === 'progress') setProgress(p => [...p, d])
-            if (event === 'optimal')  setOptimal(d)
+            if (event === 'optimal')  setOptimal(prev => (!prev || d.composite_score > prev.composite_score) ? d : prev)
             event = null
           }
         }

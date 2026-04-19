@@ -10,14 +10,14 @@ import MapStatusIndicator from './MapStatusIndicator'
 import OptimizeConfigDialog from './OptimizeConfigDialog'
 
 function scoreToColor(v) {
-  if (v >= 0.82) return '#3A8A65'
-  if (v >= 0.76) return '#E85D04'
+  if (v >= 0.72) return '#3A8A65'
+  if (v >= 0.58) return '#E85D04'
   return '#0D9488'
 }
 
 function scoreToLabel(v) {
-  if (v >= 0.82) return 'HIGH'
-  if (v >= 0.76) return 'MED'
+  if (v >= 0.72) return 'HIGH'
+  if (v >= 0.58) return 'MED'
   return 'LOWER'
 }
 
@@ -203,9 +203,9 @@ export default function SiteMap({
           )}
         </div>
         <div className="sitemap-legend">
-          <div className="sitemap-legend-item"><span className="sitemap-dot" style={{ background: '#3A8A65' }} /> Score ≥ 82 — High</div>
-          <div className="sitemap-legend-item"><span className="sitemap-dot" style={{ background: '#E85D04' }} /> Score 76–81 — Medium</div>
-          <div className="sitemap-legend-item"><span className="sitemap-dot" style={{ background: '#0D9488' }} /> Score &lt; 76 — Lower</div>
+          <div className="sitemap-legend-item"><span className="sitemap-dot" style={{ background: '#3A8A65' }} /> Score ≥ 72 — High</div>
+          <div className="sitemap-legend-item"><span className="sitemap-dot" style={{ background: '#E85D04' }} /> Score 58–71 — Medium</div>
+          <div className="sitemap-legend-item"><span className="sitemap-dot" style={{ background: '#0D9488' }} /> Score &lt; 58 — Lower</div>
         </div>
       </div>
 
@@ -228,9 +228,23 @@ export default function SiteMap({
               eventHandlers={{ click: () => handleEvaluate(optimal.lat, optimal.lon) }}
             >
               <Popup>
-                <b>Optimal Site</b><br />
-                Score: {Math.round(optimal.composite_score * 100)}/100<br />
-                ({optimal.lat.toFixed(4)}, {optimal.lon.toFixed(4)})
+                <div className="popup-inner">
+                  <div className="popup-name">Optimal Site</div>
+                  <div className="popup-loc">{optimal.lat.toFixed(4)}°N, {Math.abs(optimal.lon).toFixed(4)}°W</div>
+                  <div className="popup-score-row">
+                    <span className="popup-score-badge" style={{ background: scoreToColor(optimal.composite_score) }}>
+                      {scoreToLabel(optimal.composite_score)} &nbsp; {Math.round(optimal.composite_score * 100)} / 100
+                    </span>
+                  </div>
+                  <table className="popup-table">
+                    <tbody>
+                      <tr><td>Land</td><td>{Math.round((optimal.land_score ?? 0) * 100)}</td></tr>
+                      <tr><td>Gas</td><td>{Math.round((optimal.gas_score ?? 0) * 100)}</td></tr>
+                      <tr><td>Power</td><td>{Math.round((optimal.power_score ?? 0) * 100)}</td></tr>
+                    </tbody>
+                  </table>
+                  <div style={{ fontSize: 10, color: '#888', marginTop: 4 }}>Click for full evaluation →</div>
+                </div>
               </Popup>
             </CircleMarker>
           )}
@@ -256,9 +270,9 @@ export default function SiteMap({
                   </div>
                   <table className="popup-table">
                     <tbody>
-                      <tr><td>Sub-A Land</td><td>{Math.round(site.scores.subA * 100)}</td></tr>
-                      <tr><td>Sub-B Gas</td><td>{Math.round(site.scores.subB * 100)}</td></tr>
-                      <tr><td>Sub-C Power</td><td>{Math.round(site.scores.subC * 100)}</td></tr>
+                      <tr><td>Land</td><td>{Math.round((site.scores.land ?? site.scores.subA ?? 0) * 100)}</td></tr>
+                      <tr><td>Gas</td><td>{Math.round((site.scores.gas ?? site.scores.subB ?? 0) * 100)}</td></tr>
+                      <tr><td>Power</td><td>{Math.round((site.scores.power ?? site.scores.subC ?? 0) * 100)}</td></tr>
                       <tr><td>Gas ({site.gasHub})</td><td>${site.gasPrice.toFixed(2)}/MMBtu</td></tr>
                       <tr><td>Est. BTM power</td><td>${Number(site.estPowerCostMwh).toFixed(2)}/MWh</td></tr>
                       {site.lmp != null && <tr><td>LMP ({site.lmpNode})</td><td>${Number(site.lmp).toFixed(2)}/MWh</td></tr>}
