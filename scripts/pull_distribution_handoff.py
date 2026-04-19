@@ -278,6 +278,72 @@ def pull_fema_floodplain() -> list[dict]:
     return rows
 
 
+def pull_usgs_seismic() -> list[dict]:
+    params = {
+        "format": "geojson",
+        "starttime": "2010-01-01",
+        "minlatitude": "25.0",
+        "maxlatitude": "38.0",
+        "minlongitude": "-115.0",
+        "maxlongitude": "-93.0",
+        "minmagnitude": "2.5",
+    }
+    features = _json_from_url("https://earthquake.usgs.gov/fdsnws/event/1/query", params).get("features", [])
+    rows = []
+    for feat in features:
+        props = feat.get("properties", {})
+        coords = feat.get("geometry", {}).get("coordinates", [None, None, None])
+        ts_ms = props.get("time")
+        ts_iso = (
+            datetime.fromtimestamp(ts_ms / 1000.0, tz=timezone.utc).isoformat()
+            if ts_ms
+            else None
+        )
+        rows.append({
+            "_source": "usgs_seismic",
+            "dataset": "usgs_seismic",
+            "timestamp_utc": ts_iso,
+            "mag": props.get("mag"),
+            "place": props.get("place"),
+            "lon": coords[0],
+            "lat": coords[1],
+            "depth": coords[2] if len(coords) > 2 else None,
+            "ids": props.get("ids"),
+            "url": props.get("url"),
+            "geometry_geojson": json.dumps(feat.get("geometry")),
+        })
+    return rows
+
+
+def pull_fema_nri_wildfire() -> list[dict]:
+    params = {
+        "where": "STATE IN ('Arizona','New Mexico','Texas')",
+        "outFields": "OBJECTID,TRACTFIPS,STATE,POPULATION,WFIR_RISKS,WFIR_RISKR",
+        "f": "json",
+        "returnGeometry": "true",
+        "outSR": "4326",
+    }
+    features = _paginate_arcgis_geojson(
+        "https://services.arcgis.com/XG15cJAlne2vxtgt/arcgis/rest/services/National_Risk_Index_Census_Tracts/FeatureServer/0/query",
+        params,
+    )
+    rows = []
+    for feat in features:
+        attrs = feat.get("attributes", {})
+        rows.append({
+            "_source": "fema_nri_wildfire",
+            "dataset": "fema_nri_wildfire",
+            "object_id": attrs.get("OBJECTID"),
+            "tract_fips": attrs.get("TRACTFIPS"),
+            "state": attrs.get("STATE"),
+            "population": attrs.get("POPULATION"),
+            "wildfire_risk_score": attrs.get("WFIR_RISKS"),
+            "wildfire_risk_rating": attrs.get("WFIR_RISKR"),
+            "geometry_geojson": json.dumps(feat.get("geometry")),
+        })
+    return rows
+
+
 def pull_pipelines_infra() -> list[dict]:
     offset = 0
     rows = []
@@ -506,7 +572,9 @@ def main() -> int:
         ("eia_ng_henry_hub", pull_eia_ng_henry),
         ("caiso_lmp", pull_caiso_lmp),
         ("ercot_dam_hub_prices", pull_ercot_dam),
-        ("ercot_rtm_hub_prices", pull_ercot_rtm),
+        ("ercot_DAM_prices", pull_ercot_rtm),
+        ("usgs_seismic", pull_usgs_seismic),
+        ("fema_nri_wildfire", pull_fema_nri_wildfire),
     ]
 
     if "--only" in sys.argv:

@@ -132,6 +132,54 @@ sources:
     natural_key: [timestamp_utc, station]
     region: SW
 
+  usgs_seismic:
+    description: USGS FDSN Earthquake Catalog — historical seismic events (mag > 2.5) since 2010 in SW bbox.
+    endpoint: https://earthquake.usgs.gov/fdsnws/event/1/query
+    params:
+      format: geojson
+      minlatitude: 25.0
+      maxlatitude: 38.0
+      minlongitude: -115.0
+      maxlongitude: -93.0
+      minmagnitude: 2.5
+      starttime: "2010-01-01"
+    cadence_seconds: 86400       # pull history once daily (incremental updates can be added later)
+    freshness_sla_hours: 168
+    natural_key: [ids]           # USGS earthquake IDs are globally unique comma-separated strings
+    region: SW
+
+  usgs_whp:
+    description: Wildfire Hazard Potential (WHP) via USGS National Map MapServer — 2020/2023 classifications for the Southwest.
+    endpoint: https://index.nationalmap.gov/arcgis/rest/services/WHP/MapServer/0/query
+    cadence_seconds: 604800     # weekly — static reference data
+    freshness_sla_hours: 168
+    natural_key: [object_id]
+    region: SW
+
+  usgs_seismic:
+    description: USGS FDSN Earthquake Catalog — historical seismic events (mag > 2.5) since 2010 in SW bbox.
+    endpoint: https://earthquake.usgs.gov/fdsnws/event/1/query
+    params:
+      format: geojson
+      minlatitude: 25.0
+      maxlatitude: 38.0
+      minlongitude: -115.0
+      maxlongitude: -93.0
+      minmagnitude: 2.5
+      starttime: "2010-01-01"
+    cadence_seconds: 86400
+    freshness_sla_hours: 168
+    natural_key: [ids]
+    region: SW
+
+  fema_nri_wildfire:
+    description: FEMA National Risk Index (NRI) — Wildfire risk ratings and scores at Census Tract level for AZ/NM/TX.
+    endpoint: https://services.arcgis.com/XG15cJAlne2vxtgt/arcgis/rest/services/National_Risk_Index_Census_Tracts/FeatureServer/0/query
+    cadence_seconds: 604800     # weekly updates at most
+    freshness_sla_hours: 168
+    natural_key: [object_id]
+    region: SW
+
 # Global HTTP policy
 http:
   timeout_seconds: 30
@@ -147,6 +195,10 @@ http:
     hydro.nationalmap.gov: 1
     hazards.fema.gov: 1
     services2.arcgis.com: 4
+    earthquake.usgs.gov: 2
+    services.arcgis.com: 4
+    earthquake.usgs.gov: 2
+    index.nationalmap.gov: 2
 
 # Retention for raw audit trail
 retention:

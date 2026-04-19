@@ -199,6 +199,75 @@ PIPELINE_INFRA_SCHEMA = pa.DataFrameSchema(
 )
 
 
+SEISMIC_SCHEMA = pa.DataFrameSchema(
+    {
+        "timestamp_utc": pa.Column("datetime64[ns, UTC]", nullable=False),
+        "mag": pa.Column(float, pa.Check.in_range(-2, 10), nullable=True),
+        "place": pa.Column(str, nullable=True),
+        "lat": pa.Column(float, pa.Check.in_range(-90, 90)),
+        "lon": pa.Column(float, pa.Check.in_range(-180, 180)),
+        "depth": pa.Column(float, nullable=True),
+        "ids": pa.Column(str, nullable=False),
+        "url": pa.Column(str, nullable=True),
+        "geometry_geojson": pa.Column(str, nullable=True),
+        **_PROVENANCE,
+    },
+    strict=True,
+    coerce=True,
+)
+
+
+FEMA_NRI_WILDFIRE_SCHEMA = pa.DataFrameSchema(
+    {
+        "object_id": pa.Column(float, nullable=False),
+        "tract_fips": pa.Column(str, nullable=True),
+        "state": pa.Column(str, nullable=True),
+        "wildfire_risk_score": pa.Column(float, nullable=True),
+        "wildfire_risk_rating": pa.Column(str, nullable=True),
+        "population": pa.Column(float, nullable=True),
+        "geometry_geojson": pa.Column(str, nullable=True),
+        **_PROVENANCE,
+    },
+    strict=True,
+    coerce=True,
+)
+
+
+SEISMIC_SCHEMA = pa.DataFrameSchema(
+    {
+        "timestamp_utc": pa.Column("datetime64[ns, UTC]", nullable=False),
+        "mag": pa.Column(float, pa.Check.in_range(-2, 10), nullable=True),
+        "place": pa.Column(str, nullable=True),
+        "lat": pa.Column(float, pa.Check.in_range(-90, 90)),
+        "lon": pa.Column(float, pa.Check.in_range(-180, 180)),
+        "depth": pa.Column(float, nullable=True),
+        "ids": pa.Column(str, nullable=False),
+        "url": pa.Column(str, nullable=True),
+        "geometry_geojson": pa.Column(str, nullable=True),
+        **_PROVENANCE,
+    },
+    strict=True,
+    coerce=True,
+)
+
+
+WILDFIRE_SCHEMA = pa.DataFrameSchema(
+    {
+        "object_id": pa.Column(float, nullable=False),
+        "whp_class": pa.Column(int, pa.Check.in_range(1, 5), nullable=True),
+        "whp_class_name": pa.Column(
+            str,
+            pa.Check.isin(["Very Low", "Low", "Moderate", "High", "Very High"]),
+            nullable=True,
+        ),
+        "geometry_geojson": pa.Column(str, nullable=True),
+        **_PROVENANCE,
+    },
+    strict=True,
+    coerce=True,
+)
+
+
 SCHEMAS = {
     "eia930": EIA930_SCHEMA,
     "eia_ng": EIA_NG_SCHEMA,
@@ -211,4 +280,6 @@ SCHEMAS = {
     "nhd_waterbody": NHD_WATERBODY_SCHEMA,
     "fema_floodplain": FEMA_FLOODPLAIN_SCHEMA,
     "pipelines_infra": PIPELINE_INFRA_SCHEMA,
+    "usgs_seismic": SEISMIC_SCHEMA,
+    "fema_nri_wildfire": FEMA_NRI_WILDFIRE_SCHEMA,
 }

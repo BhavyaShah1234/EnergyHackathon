@@ -108,6 +108,18 @@ REGISTRY: dict[str, DatasetEntry] = {
         join_keys=["pipeline_id"],
         description="NG pipeline routes (spatial + type + operator) — EIA ArcGIS, WECC-SW + ERCOT bbox",
     ),
+    "usgs_seismic": DatasetEntry(
+        source="usgs_seismic", dataset="usgs_seismic",
+        module="pipeline.sources.usgs_seismic", class_name="USGSSeismicIngestor",
+        join_keys=["ids"],
+        description="USGS historical seismic activity (mag > 2.5) — SW/ERCOT bbox",
+    ),
+    "fema_nri_wildfire": DatasetEntry(
+        source="fema_nri_wildfire", dataset="fema_nri_wildfire",
+        module="pipeline.sources.fema_nri_wildfire", class_name="FEMANRIWildfireIngestor",
+        join_keys=["object_id"],
+        description="FEMA National Risk Index (NRI) — Wildfire risk ratings/scores per census tract",
+    ),
 }
 
 
