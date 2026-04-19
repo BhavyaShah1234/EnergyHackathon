@@ -205,6 +205,8 @@ Every row that enters silver passes a [pandera](https://pandera.readthedocs.io/)
 
 ### `pipelines_infra` — Natural Gas Pipeline Routes (EIA)
 
+> **Teammate quickstart:** [`docs/pipelines_infra.md`](docs/pipelines_infra.md) — how to pull, how to read, field dictionary, known gaps. Sample rows in [`data/_samples/pipelines_infra_sample.csv`](data/_samples/pipelines_infra_sample.csv).
+>
 > Official docs: [U.S. Energy Atlas](https://atlas.eia.gov/) · [Natural Gas Interstate and Intrastate Pipelines FeatureServer](https://services2.arcgis.com/FiaPA4ga0iQKduv3/arcgis/rest/services/Natural_Gas_Interstate_and_Intrastate_Pipelines_1/FeatureServer/0) · Collide sub-B
 
 | Column | Type | Constraints | Description |
