@@ -1,0 +1,95 @@
+grid_id,interval_start_utc,lmp_component,node,price_usd_per_mwh,probability_of_precipitation,short_forecast,source,start_time_utc,station,temperature_c,temperature_f,text_description,timestamp_utc,visibility_m,wind_speed,wind_speed_kph
+,,,,,,,noaa_obs,,KPHX,31,,Clear,2026-04-18T21:00:00+00:00,16093.44,,5.544
+,,,,,,,noaa_obs,,KPHX,31.1,,Mostly Clear,2026-04-18T20:51:00+00:00,16090,,16.56
+,,,,,,,noaa_obs,,KPHX,31,,,2026-04-18T20:45:00+00:00,16093.44,,11.124
+,,,,,,,noaa_obs,,KPHX,32,,Clear,2026-04-18T20:40:00+00:00,16093.44,,9.252
+,,,,,,,noaa_obs,,KPHX,33,,Clear,2026-04-18T20:35:00+00:00,16093.44,,14.832
+,,,,,,,noaa_obs,,KPHX,31,,Clear,2026-04-18T20:30:00+00:00,16093.44,,14.832
+,,,,,,,noaa_obs,,KPHX,31,,Clear,2026-04-18T20:25:00+00:00,16093.44,,9.252
+,,,,,,,noaa_obs,,KPHX,31,,Clear,2026-04-18T20:20:00+00:00,16093.44,,20.376
+,,,,,,,noaa_obs,,KPHX,30,,Clear,2026-04-18T20:15:00+00:00,16093.44,,11.124
+,,,,,,,noaa_obs,,KPHX,30,,Clear,2026-04-18T20:10:00+00:00,16093.44,,12.96
+,,,,,,,noaa_obs,,KPHX,31,,,2026-04-18T20:05:00+00:00,16093.44,,20.376
+,,,,,,,noaa_obs,,KPHX,31,,,2026-04-18T20:00:00+00:00,16093.44,,12.96
+,,,,,,,noaa_obs,,KPHX,31,,,2026-04-18T19:55:00+00:00,16093.44,,
+,,,,,,,noaa_obs,,KPHX,31.1,,Mostly Clear,2026-04-18T19:51:00+00:00,16090,,9.36
+,,,,,,,noaa_obs,,KPHX,31,,,2026-04-18T19:50:00+00:00,16093.44,,9.252
+,,,,,,,noaa_obs,,KPHX,32,,,2026-04-18T19:45:00+00:00,16093.44,,14.832
+,,,,,,,noaa_obs,,KPHX,31,,,2026-04-18T19:40:00+00:00,16093.44,,12.96
+,,,,,,,noaa_obs,,KPHX,29,,,2026-04-18T19:35:00+00:00,16093.44,,7.416
+,,,,,,,noaa_obs,,KPHX,29,,,2026-04-18T19:30:00+00:00,16093.44,,18.504
+,,,,,,,noaa_obs,,KPHX,30,,,2026-04-18T19:25:00+00:00,16093.44,,16.668
+"PSR/158,56",,,,,0,Sunny,noaa_forecast,2026-04-18T14:00:00-07:00,,,90,,,,5 mph,
+"PSR/158,56",,,,,0,Sunny,noaa_forecast,2026-04-18T15:00:00-07:00,,,90,,,,5 mph,
+"PSR/158,56",,,,,0,Sunny,noaa_forecast,2026-04-18T16:00:00-07:00,,,90,,,,0 mph,
+"PSR/158,56",,,,,0,Sunny,noaa_forecast,2026-04-18T17:00:00-07:00,,,91,,,,0 mph,
+"PSR/158,56",,,,,0,Clear,noaa_forecast,2026-04-18T18:00:00-07:00,,,90,,,,0 mph,
+"PSR/158,56",,,,,0,Clear,noaa_forecast,2026-04-18T19:00:00-07:00,,,87,,,,0 mph,
+"PSR/158,56",,,,,0,Mostly Clear,noaa_forecast,2026-04-18T20:00:00-07:00,,,82,,,,5 mph,
+"PSR/158,56",,,,,0,Clear,noaa_forecast,2026-04-18T21:00:00-07:00,,,79,,,,5 mph,
+"PSR/158,56",,,,,0,Clear,noaa_forecast,2026-04-18T22:00:00-07:00,,,77,,,,5 mph,
+"PSR/158,56",,,,,0,Mostly Clear,noaa_forecast,2026-04-18T23:00:00-07:00,,,76,,,,5 mph,
+"PSR/158,56",,,,,0,Mostly Clear,noaa_forecast,2026-04-19T00:00:00-07:00,,,75,,,,5 mph,
+"PSR/158,56",,,,,0,Clear,noaa_forecast,2026-04-19T01:00:00-07:00,,,74,,,,5 mph,
+"PSR/158,56",,,,,0,Mostly Clear,noaa_forecast,2026-04-19T02:00:00-07:00,,,72,,,,0 mph,
+"PSR/158,56",,,,,0,Mostly Clear,noaa_forecast,2026-04-19T03:00:00-07:00,,,70,,,,5 mph,
+"PSR/158,56",,,,,0,Mostly Clear,noaa_forecast,2026-04-19T04:00:00-07:00,,,70,,,,5 mph,
+"PSR/158,56",,,,,0,Partly Cloudy,noaa_forecast,2026-04-19T05:00:00-07:00,,,69,,,,5 mph,
+"PSR/158,56",,,,,0,Mostly Sunny,noaa_forecast,2026-04-19T06:00:00-07:00,,,70,,,,10 mph,
+"PSR/158,56",,,,,0,Partly Sunny,noaa_forecast,2026-04-19T07:00:00-07:00,,,71,,,,10 mph,
+"PSR/158,56",,,,,0,Partly Sunny,noaa_forecast,2026-04-19T08:00:00-07:00,,,76,,,,15 mph,
+"PSR/158,56",,,,,0,Mostly Sunny,noaa_forecast,2026-04-19T09:00:00-07:00,,,81,,,,15 mph,
+"PSR/158,56",,,,,0,Mostly Sunny,noaa_forecast,2026-04-19T10:00:00-07:00,,,85,,,,15 mph,
+"PSR/158,56",,,,,0,Mostly Sunny,noaa_forecast,2026-04-19T11:00:00-07:00,,,89,,,,15 mph,
+"PSR/158,56",,,,,0,Mostly Sunny,noaa_forecast,2026-04-19T12:00:00-07:00,,,91,,,,15 mph,
+"PSR/158,56",,,,,0,Partly Sunny,noaa_forecast,2026-04-19T13:00:00-07:00,,,93,,,,15 mph,
+,2026-04-18T19:00:00-00:00,MCC,PALOVRDE_ASR-APND,6.05236,,,caiso_lmp,,,,,,,,,
+,2026-04-18T19:05:00-00:00,MCC,PALOVRDE_ASR-APND,6.04437,,,caiso_lmp,,,,,,,,,
+,2026-04-18T19:10:00-00:00,MCC,PALOVRDE_ASR-APND,5.92742,,,caiso_lmp,,,,,,,,,
+,2026-04-18T19:15:00-00:00,MCC,PALOVRDE_ASR-APND,6.02972,,,caiso_lmp,,,,,,,,,
+,2026-04-18T19:20:00-00:00,MCC,PALOVRDE_ASR-APND,5.97718,,,caiso_lmp,,,,,,,,,
+,2026-04-18T19:25:00-00:00,MCC,PALOVRDE_ASR-APND,2.56892,,,caiso_lmp,,,,,,,,,
+,2026-04-18T19:30:00-00:00,MCC,PALOVRDE_ASR-APND,2.41907,,,caiso_lmp,,,,,,,,,
+,2026-04-18T19:35:00-00:00,MCC,PALOVRDE_ASR-APND,2.41166,,,caiso_lmp,,,,,,,,,
+,2026-04-18T19:40:00-00:00,MCC,PALOVRDE_ASR-APND,2.42322,,,caiso_lmp,,,,,,,,,
+,2026-04-18T19:45:00-00:00,MCC,PALOVRDE_ASR-APND,2.43036,,,caiso_lmp,,,,,,,,,
+,2026-04-18T19:50:00-00:00,MCC,PALOVRDE_ASR-APND,2.40423,,,caiso_lmp,,,,,,,,,
+,2026-04-18T19:55:00-00:00,MCC,PALOVRDE_ASR-APND,2.41552,,,caiso_lmp,,,,,,,,,
+,2026-04-18T20:00:00-00:00,MCC,PALOVRDE_ASR-APND,2.40462,,,caiso_lmp,,,,,,,,,
+,2026-04-18T20:05:00-00:00,MCC,PALOVRDE_ASR-APND,2.39874,,,caiso_lmp,,,,,,,,,
+,2026-04-18T20:10:00-00:00,MCC,PALOVRDE_ASR-APND,2.48472,,,caiso_lmp,,,,,,,,,
+,2026-04-18T20:15:00-00:00,MCC,PALOVRDE_ASR-APND,2.42138,,,caiso_lmp,,,,,,,,,
+,2026-04-18T20:20:00-00:00,MCC,PALOVRDE_ASR-APND,2.52154,,,caiso_lmp,,,,,,,,,
+,2026-04-18T20:25:00-00:00,MCC,PALOVRDE_ASR-APND,2.531,,,caiso_lmp,,,,,,,,,
+,2026-04-18T20:30:00-00:00,MCC,PALOVRDE_ASR-APND,2.35728,,,caiso_lmp,,,,,,,,,
+,2026-04-18T20:35:00-00:00,MCC,PALOVRDE_ASR-APND,2.30666,,,caiso_lmp,,,,,,,,,
+,2026-04-18T20:40:00-00:00,MCC,PALOVRDE_ASR-APND,2.25045,,,caiso_lmp,,,,,,,,,
+,2026-04-18T20:45:00-00:00,MCC,PALOVRDE_ASR-APND,15.10143,,,caiso_lmp,,,,,,,,,
+,2026-04-18T20:50:00-00:00,MCC,PALOVRDE_ASR-APND,15.14445,,,caiso_lmp,,,,,,,,,
+,2026-04-18T20:55:00-00:00,MCC,PALOVRDE_ASR-APND,15.31502,,,caiso_lmp,,,,,,,,,
+,2026-04-18T19:00:00-00:00,MCE,PALOVRDE_ASR-APND,-11.28677,,,caiso_lmp,,,,,,,,,
+,2026-04-18T19:05:00-00:00,MCE,PALOVRDE_ASR-APND,-11.41569,,,caiso_lmp,,,,,,,,,
+,2026-04-18T19:10:00-00:00,MCE,PALOVRDE_ASR-APND,-11.41155,,,caiso_lmp,,,,,,,,,
+,2026-04-18T19:15:00-00:00,MCE,PALOVRDE_ASR-APND,-11.61414,,,caiso_lmp,,,,,,,,,
+,2026-04-18T19:20:00-00:00,MCE,PALOVRDE_ASR-APND,-11.76091,,,caiso_lmp,,,,,,,,,
+,2026-04-18T19:25:00-00:00,MCE,PALOVRDE_ASR-APND,-11.71932,,,caiso_lmp,,,,,,,,,
+,2026-04-18T19:30:00-00:00,MCE,PALOVRDE_ASR-APND,-11.5985,,,caiso_lmp,,,,,,,,,
+,2026-04-18T19:35:00-00:00,MCE,PALOVRDE_ASR-APND,-11.59105,,,caiso_lmp,,,,,,,,,
+,2026-04-18T19:40:00-00:00,MCE,PALOVRDE_ASR-APND,-11.60242,,,caiso_lmp,,,,,,,,,
+,2026-04-18T19:45:00-00:00,MCE,PALOVRDE_ASR-APND,-11.60996,,,caiso_lmp,,,,,,,,,
+,2026-04-18T19:50:00-00:00,MCE,PALOVRDE_ASR-APND,-11.58407,,,caiso_lmp,,,,,,,,,
+,2026-04-18T19:55:00-00:00,MCE,PALOVRDE_ASR-APND,-11.59531,,,caiso_lmp,,,,,,,,,
+,2026-04-18T20:00:00-00:00,MCE,PALOVRDE_ASR-APND,-11.59611,,,caiso_lmp,,,,,,,,,
+,2026-04-18T20:05:00-00:00,MCE,PALOVRDE_ASR-APND,-11.59014,,,caiso_lmp,,,,,,,,,
+,2026-04-18T20:10:00-00:00,MCE,PALOVRDE_ASR-APND,-11.67485,,,caiso_lmp,,,,,,,,,
+,2026-04-18T20:15:00-00:00,MCE,PALOVRDE_ASR-APND,-11.61559,,,caiso_lmp,,,,,,,,,
+,2026-04-18T20:20:00-00:00,MCE,PALOVRDE_ASR-APND,-11.71308,,,caiso_lmp,,,,,,,,,
+,2026-04-18T20:25:00-00:00,MCE,PALOVRDE_ASR-APND,-11.72217,,,caiso_lmp,,,,,,,,,
+,2026-04-18T20:30:00-00:00,MCE,PALOVRDE_ASR-APND,-11.5605,,,caiso_lmp,,,,,,,,,
+,2026-04-18T20:35:00-00:00,MCE,PALOVRDE_ASR-APND,-11.51066,,,caiso_lmp,,,,,,,,,
+,2026-04-18T20:40:00-00:00,MCE,PALOVRDE_ASR-APND,-11.45542,,,caiso_lmp,,,,,,,,,
+,2026-04-18T20:45:00-00:00,MCE,PALOVRDE_ASR-APND,-11.3966,,,caiso_lmp,,,,,,,,,
+,2026-04-18T20:50:00-00:00,MCE,PALOVRDE_ASR-APND,-11.43927,,,caiso_lmp,,,,,,,,,
+,2026-04-18T20:55:00-00:00,MCE,PALOVRDE_ASR-APND,-11.60845,,,caiso_lmp,,,,,,,,,
+,2026-04-18T19:00:00-00:00,MCL,PALOVRDE_ASR-APND,0.18171,,,caiso_lmp,,,,,,,,,
+,2026-04-18T19:05:00-00:00,MCL,PALOVRDE_ASR-APND,0.18346,,,caiso_lmp,,,,,,,,,

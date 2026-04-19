@@ -1,0 +1,151 @@
+# Single source of truth for every live data source.
+# Cadence = how often run_live.py polls. Freshness SLA = how stale a row
+# can be before the DQ report flags the source as degraded.
+
+sources:
+
+  eia930_azps:
+    description: EIA-930 hourly demand, forecast, net generation, interchange for AZPS (APS balancing authority)
+    endpoint: https://api.eia.gov/v2/electricity/rto/region-data/data/
+    facets:
+      respondent: [AZPS]
+      type: [D, DF, NG, TI]   # demand, day-ahead forecast, net-gen, total interchange
+    cadence_seconds: 900        # poll every 15 min; data updates hourly
+    freshness_sla_hours: 3
+    natural_key: [period_utc, respondent, type]
+    region: SW
+
+  eia930_ciso:
+    description: EIA-930 hourly data for CAISO (for CA/NV cross-BA context)
+    endpoint: https://api.eia.gov/v2/electricity/rto/region-data/data/
+    facets:
+      respondent: [CISO]
+      type: [D, DF, NG, TI]
+    cadence_seconds: 900
+    freshness_sla_hours: 3
+    natural_key: [period_utc, respondent, type]
+    region: WECC
+
+  eia930_erco:
+    description: EIA-930 hourly data for ERCOT (Texas)
+    endpoint: https://api.eia.gov/v2/electricity/rto/region-data/data/
+    facets:
+      respondent: [ERCO]
+      type: [D, DF, NG, TI]
+    cadence_seconds: 900
+    freshness_sla_hours: 3
+    natural_key: [period_utc, respondent, type]
+    region: ERCOT
+
+  eia_ng_henry_hub:
+    description: Daily spot natural gas price at Henry Hub (LA) — baseline for BTM economics
+    endpoint: https://api.eia.gov/v2/natural-gas/pri/fut/data/
+    facets:
+      series: [RNGWHHD]
+    cadence_seconds: 3600
+    freshness_sla_hours: 48     # daily series, weekends/holidays are expected gaps
+    natural_key: [period_utc, series]
+    region: US
+
+  eia_ng_waha:
+    description: Daily spot natural gas price at Waha Hub (W. Texas) — primary fuel cost for Southwest BTM
+    endpoint: https://api.eia.gov/v2/natural-gas/pri/sum/data/
+    facets:
+      series: [RNGC4]           # Waha proxy via EIA natural gas daily
+    cadence_seconds: 3600
+    freshness_sla_hours: 72
+    natural_key: [period_utc, series]
+    region: SW
+
+  caiso_lmp:
+    description: CAISO OASIS PRC_LMP — 5-min LMP at trading hubs (TH_SP15, TH_NP15, TH_ZP26, PALOVRDE_ASR-APND)
+    endpoint: https://oasis.caiso.com/oasisapi/SingleZip
+    params:
+      queryname: PRC_INTVL_LMP
+      market_run_id: RTM
+      version: 1
+    nodes: [TH_SP15_GEN-APND, TH_NP15_GEN-APND, PALOVRDE_ASR-APND]
+    cadence_seconds: 300
+    freshness_sla_hours: 1
+    natural_key: [interval_start_utc, node, lmp_component]
+    region: WECC
+
+  # --- Geospatial / static datasets (Collide sub-A: siting) ---
+
+  blm_sma:
+    description: BLM Surface Management Agency — federal and state land ownership parcels for AZ/NM/TX
+    endpoint: https://gis.blm.gov/arcgis/rest/services/lands/BLM_Natl_SMA_Cached_without_Outline/MapServer/0/query
+    cadence_seconds: 86400       # daily — static data, check once a day
+    freshness_sla_hours: 168     # weekly tolerance for static data
+    natural_key: [object_id]
+    region: SW
+
+  hifld_fiber:
+    description: Fiber infrastructure proxy via FCC BDC — FTTP availability at census-block level for AZ/NM/TX
+    endpoint: https://broadbandmap.fcc.gov/api/public/map/listAvailability/fixed/query
+    cadence_seconds: 86400
+    freshness_sla_hours: 168
+    natural_key: [block_geoid, provider_id]
+    region: SW
+
+  nhd_waterbody:
+    description: USGS NHD waterbody polygons (lakes, reservoirs) for cooling water proximity analysis
+    endpoint: https://hydro.nationalmap.gov/arcgis/rest/services/nhd/MapServer/10/query
+    cadence_seconds: 86400
+    freshness_sla_hours: 168
+    natural_key: [object_id]
+    region: SW
+
+  fema_floodplain:
+    description: FEMA NFHL 100-year/500-year flood hazard zones for environmental risk screening
+    endpoint: https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer/28/query
+    cadence_seconds: 86400
+    freshness_sla_hours: 168
+    natural_key: [object_id]
+    region: SW
+
+  pipelines_infra:
+    description: Natural gas interstate & intrastate pipeline routes (EIA ArcGIS). Static infra reference — spatial coords + type + operator per segment, filtered to WECC-SW + ERCOT bbox.
+    endpoint: https://services2.arcgis.com/FiaPA4ga0iQKduv3/arcgis/rest/services/Natural_Gas_Interstate_and_Intrastate_Pipelines_1/FeatureServer/0/query
+    cadence_seconds: 604800     # weekly — EIA updates the layer annually at most
+    freshness_sla_hours: 168
+    natural_key: [pipeline_id]
+    region: SW
+
+  noaa_phoenix:
+    description: NOAA NWS gridpoint forecast for Phoenix (PSR/158,56) — temperature, windSpeed, visibility for sandstorm trigger
+    endpoint: https://api.weather.gov/gridpoints/PSR/158,56/forecast/hourly
+    cadence_seconds: 1800
+    freshness_sla_hours: 2
+    natural_key: [start_time_utc, grid_id]
+    region: SW
+
+  noaa_phoenix_obs:
+    description: NOAA NWS current observations at KPHX — actual temp/visibility/wind, ground truth for stress triggers
+    endpoint: https://api.weather.gov/stations/KPHX/observations
+    cadence_seconds: 600
+    freshness_sla_hours: 2
+    natural_key: [timestamp_utc, station]
+    region: SW
+
+# Global HTTP policy
+http:
+  timeout_seconds: 30
+  max_retries: 5
+  backoff_base_seconds: 1.0
+  backoff_max_seconds: 60
+  per_host_rps:
+    api.eia.gov: 4
+    oasis.caiso.com: 1
+    api.weather.gov: 2
+    gis.blm.gov: 1
+    broadbandmap.fcc.gov: 1
+    hydro.nationalmap.gov: 1
+    hazards.fema.gov: 1
+    services2.arcgis.com: 4
+
+# Retention for raw audit trail
+retention:
+  raw_days: 7
+  quarantine_days: 30
+  dq_reports_days: 90

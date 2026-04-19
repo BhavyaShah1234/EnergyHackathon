@@ -1,0 +1,352 @@
+[
+  {
+    "source": "caiso_lmp",
+    "interval_start_utc": "2026-04-18T19:00:00-00:00",
+    "node": "PALOVRDE_ASR-APND",
+    "lmp_component": "MCC",
+    "price_usd_per_mwh": "6.05236"
+  },
+  {
+    "source": "caiso_lmp",
+    "interval_start_utc": "2026-04-18T19:05:00-00:00",
+    "node": "PALOVRDE_ASR-APND",
+    "lmp_component": "MCC",
+    "price_usd_per_mwh": "6.04437"
+  },
+  {
+    "source": "caiso_lmp",
+    "interval_start_utc": "2026-04-18T19:10:00-00:00",
+    "node": "PALOVRDE_ASR-APND",
+    "lmp_component": "MCC",
+    "price_usd_per_mwh": "5.92742"
+  },
+  {
+    "source": "caiso_lmp",
+    "interval_start_utc": "2026-04-18T19:15:00-00:00",
+    "node": "PALOVRDE_ASR-APND",
+    "lmp_component": "MCC",
+    "price_usd_per_mwh": "6.02972"
+  },
+  {
+    "source": "caiso_lmp",
+    "interval_start_utc": "2026-04-18T19:20:00-00:00",
+    "node": "PALOVRDE_ASR-APND",
+    "lmp_component": "MCC",
+    "price_usd_per_mwh": "5.97718"
+  },
+  {
+    "source": "caiso_lmp",
+    "interval_start_utc": "2026-04-18T19:25:00-00:00",
+    "node": "PALOVRDE_ASR-APND",
+    "lmp_component": "MCC",
+    "price_usd_per_mwh": "2.56892"
+  },
+  {
+    "source": "caiso_lmp",
+    "interval_start_utc": "2026-04-18T19:30:00-00:00",
+    "node": "PALOVRDE_ASR-APND",
+    "lmp_component": "MCC",
+    "price_usd_per_mwh": "2.41907"
+  },
+  {
+    "source": "caiso_lmp",
+    "interval_start_utc": "2026-04-18T19:35:00-00:00",
+    "node": "PALOVRDE_ASR-APND",
+    "lmp_component": "MCC",
+    "price_usd_per_mwh": "2.41166"
+  },
+  {
+    "source": "caiso_lmp",
+    "interval_start_utc": "2026-04-18T19:40:00-00:00",
+    "node": "PALOVRDE_ASR-APND",
+    "lmp_component": "MCC",
+    "price_usd_per_mwh": "2.42322"
+  },
+  {
+    "source": "caiso_lmp",
+    "interval_start_utc": "2026-04-18T19:45:00-00:00",
+    "node": "PALOVRDE_ASR-APND",
+    "lmp_component": "MCC",
+    "price_usd_per_mwh": "2.43036"
+  },
+  {
+    "source": "caiso_lmp",
+    "interval_start_utc": "2026-04-18T19:50:00-00:00",
+    "node": "PALOVRDE_ASR-APND",
+    "lmp_component": "MCC",
+    "price_usd_per_mwh": "2.40423"
+  },
+  {
+    "source": "caiso_lmp",
+    "interval_start_utc": "2026-04-18T19:55:00-00:00",
+    "node": "PALOVRDE_ASR-APND",
+    "lmp_component": "MCC",
+    "price_usd_per_mwh": "2.41552"
+  },
+  {
+    "source": "caiso_lmp",
+    "interval_start_utc": "2026-04-18T20:00:00-00:00",
+    "node": "PALOVRDE_ASR-APND",
+    "lmp_component": "MCC",
+    "price_usd_per_mwh": "2.40462"
+  },
+  {
+    "source": "caiso_lmp",
+    "interval_start_utc": "2026-04-18T20:05:00-00:00",
+    "node": "PALOVRDE_ASR-APND",
+    "lmp_component": "MCC",
+    "price_usd_per_mwh": "2.39874"
+  },
+  {
+    "source": "caiso_lmp",
+    "interval_start_utc": "2026-04-18T20:10:00-00:00",
+    "node": "PALOVRDE_ASR-APND",
+    "lmp_component": "MCC",
+    "price_usd_per_mwh": "2.48472"
+  },
+  {
+    "source": "caiso_lmp",
+    "interval_start_utc": "2026-04-18T20:15:00-00:00",
+    "node": "PALOVRDE_ASR-APND",
+    "lmp_component": "MCC",
+    "price_usd_per_mwh": "2.42138"
+  },
+  {
+    "source": "caiso_lmp",
+    "interval_start_utc": "2026-04-18T20:20:00-00:00",
+    "node": "PALOVRDE_ASR-APND",
+    "lmp_component": "MCC",
+    "price_usd_per_mwh": "2.52154"
+  },
+  {
+    "source": "caiso_lmp",
+    "interval_start_utc": "2026-04-18T20:25:00-00:00",
+    "node": "PALOVRDE_ASR-APND",
+    "lmp_component": "MCC",
+    "price_usd_per_mwh": "2.531"
+  },
+  {
+    "source": "caiso_lmp",
+    "interval_start_utc": "2026-04-18T20:30:00-00:00",
+    "node": "PALOVRDE_ASR-APND",
+    "lmp_component": "MCC",
+    "price_usd_per_mwh": "2.35728"
+  },
+  {
+    "source": "caiso_lmp",
+    "interval_start_utc": "2026-04-18T20:35:00-00:00",
+    "node": "PALOVRDE_ASR-APND",
+    "lmp_component": "MCC",
+    "price_usd_per_mwh": "2.30666"
+  },
+  {
+    "source": "caiso_lmp",
+    "interval_start_utc": "2026-04-18T20:40:00-00:00",
+    "node": "PALOVRDE_ASR-APND",
+    "lmp_component": "MCC",
+    "price_usd_per_mwh": "2.25045"
+  },
+  {
+    "source": "caiso_lmp",
+    "interval_start_utc": "2026-04-18T20:45:00-00:00",
+    "node": "PALOVRDE_ASR-APND",
+    "lmp_component": "MCC",
+    "price_usd_per_mwh": "15.10143"
+  },
+  {
+    "source": "caiso_lmp",
+    "interval_start_utc": "2026-04-18T20:50:00-00:00",
+    "node": "PALOVRDE_ASR-APND",
+    "lmp_component": "MCC",
+    "price_usd_per_mwh": "15.14445"
+  },
+  {
+    "source": "caiso_lmp",
+    "interval_start_utc": "2026-04-18T20:55:00-00:00",
+    "node": "PALOVRDE_ASR-APND",
+    "lmp_component": "MCC",
+    "price_usd_per_mwh": "15.31502"
+  },
+  {
+    "source": "caiso_lmp",
+    "interval_start_utc": "2026-04-18T19:00:00-00:00",
+    "node": "PALOVRDE_ASR-APND",
+    "lmp_component": "MCE",
+    "price_usd_per_mwh": "-11.28677"
+  },
+  {
+    "source": "caiso_lmp",
+    "interval_start_utc": "2026-04-18T19:05:00-00:00",
+    "node": "PALOVRDE_ASR-APND",
+    "lmp_component": "MCE",
+    "price_usd_per_mwh": "-11.41569"
+  },
+  {
+    "source": "caiso_lmp",
+    "interval_start_utc": "2026-04-18T19:10:00-00:00",
+    "node": "PALOVRDE_ASR-APND",
+    "lmp_component": "MCE",
+    "price_usd_per_mwh": "-11.41155"
+  },
+  {
+    "source": "caiso_lmp",
+    "interval_start_utc": "2026-04-18T19:15:00-00:00",
+    "node": "PALOVRDE_ASR-APND",
+    "lmp_component": "MCE",
+    "price_usd_per_mwh": "-11.61414"
+  },
+  {
+    "source": "caiso_lmp",
+    "interval_start_utc": "2026-04-18T19:20:00-00:00",
+    "node": "PALOVRDE_ASR-APND",
+    "lmp_component": "MCE",
+    "price_usd_per_mwh": "-11.76091"
+  },
+  {
+    "source": "caiso_lmp",
+    "interval_start_utc": "2026-04-18T19:25:00-00:00",
+    "node": "PALOVRDE_ASR-APND",
+    "lmp_component": "MCE",
+    "price_usd_per_mwh": "-11.71932"
+  },
+  {
+    "source": "caiso_lmp",
+    "interval_start_utc": "2026-04-18T19:30:00-00:00",
+    "node": "PALOVRDE_ASR-APND",
+    "lmp_component": "MCE",
+    "price_usd_per_mwh": "-11.5985"
+  },
+  {
+    "source": "caiso_lmp",
+    "interval_start_utc": "2026-04-18T19:35:00-00:00",
+    "node": "PALOVRDE_ASR-APND",
+    "lmp_component": "MCE",
+    "price_usd_per_mwh": "-11.59105"
+  },
+  {
+    "source": "caiso_lmp",
+    "interval_start_utc": "2026-04-18T19:40:00-00:00",
+    "node": "PALOVRDE_ASR-APND",
+    "lmp_component": "MCE",
+    "price_usd_per_mwh": "-11.60242"
+  },
+  {
+    "source": "caiso_lmp",
+    "interval_start_utc": "2026-04-18T19:45:00-00:00",
+    "node": "PALOVRDE_ASR-APND",
+    "lmp_component": "MCE",
+    "price_usd_per_mwh": "-11.60996"
+  },
+  {
+    "source": "caiso_lmp",
+    "interval_start_utc": "2026-04-18T19:50:00-00:00",
+    "node": "PALOVRDE_ASR-APND",
+    "lmp_component": "MCE",
+    "price_usd_per_mwh": "-11.58407"
+  },
+  {
+    "source": "caiso_lmp",
+    "interval_start_utc": "2026-04-18T19:55:00-00:00",
+    "node": "PALOVRDE_ASR-APND",
+    "lmp_component": "MCE",
+    "price_usd_per_mwh": "-11.59531"
+  },
+  {
+    "source": "caiso_lmp",
+    "interval_start_utc": "2026-04-18T20:00:00-00:00",
+    "node": "PALOVRDE_ASR-APND",
+    "lmp_component": "MCE",
+    "price_usd_per_mwh": "-11.59611"
+  },
+  {
+    "source": "caiso_lmp",
+    "interval_start_utc": "2026-04-18T20:05:00-00:00",
+    "node": "PALOVRDE_ASR-APND",
+    "lmp_component": "MCE",
+    "price_usd_per_mwh": "-11.59014"
+  },
+  {
+    "source": "caiso_lmp",
+    "interval_start_utc": "2026-04-18T20:10:00-00:00",
+    "node": "PALOVRDE_ASR-APND",
+    "lmp_component": "MCE",
+    "price_usd_per_mwh": "-11.67485"
+  },
+  {
+    "source": "caiso_lmp",
+    "interval_start_utc": "2026-04-18T20:15:00-00:00",
+    "node": "PALOVRDE_ASR-APND",
+    "lmp_component": "MCE",
+    "price_usd_per_mwh": "-11.61559"
+  },
+  {
+    "source": "caiso_lmp",
+    "interval_start_utc": "2026-04-18T20:20:00-00:00",
+    "node": "PALOVRDE_ASR-APND",
+    "lmp_component": "MCE",
+    "price_usd_per_mwh": "-11.71308"
+  },
+  {
+    "source": "caiso_lmp",
+    "interval_start_utc": "2026-04-18T20:25:00-00:00",
+    "node": "PALOVRDE_ASR-APND",
+    "lmp_component": "MCE",
+    "price_usd_per_mwh": "-11.72217"
+  },
+  {
+    "source": "caiso_lmp",
+    "interval_start_utc": "2026-04-18T20:30:00-00:00",
+    "node": "PALOVRDE_ASR-APND",
+    "lmp_component": "MCE",
+    "price_usd_per_mwh": "-11.5605"
+  },
+  {
+    "source": "caiso_lmp",
+    "interval_start_utc": "2026-04-18T20:35:00-00:00",
+    "node": "PALOVRDE_ASR-APND",
+    "lmp_component": "MCE",
+    "price_usd_per_mwh": "-11.51066"
+  },
+  {
+    "source": "caiso_lmp",
+    "interval_start_utc": "2026-04-18T20:40:00-00:00",
+    "node": "PALOVRDE_ASR-APND",
+    "lmp_component": "MCE",
+    "price_usd_per_mwh": "-11.45542"
+  },
+  {
+    "source": "caiso_lmp",
+    "interval_start_utc": "2026-04-18T20:45:00-00:00",
+    "node": "PALOVRDE_ASR-APND",
+    "lmp_component": "MCE",
+    "price_usd_per_mwh": "-11.3966"
+  },
+  {
+    "source": "caiso_lmp",
+    "interval_start_utc": "2026-04-18T20:50:00-00:00",
+    "node": "PALOVRDE_ASR-APND",
+    "lmp_component": "MCE",
+    "price_usd_per_mwh": "-11.43927"
+  },
+  {
+    "source": "caiso_lmp",
+    "interval_start_utc": "2026-04-18T20:55:00-00:00",
+    "node": "PALOVRDE_ASR-APND",
+    "lmp_component": "MCE",
+    "price_usd_per_mwh": "-11.60845"
+  },
+  {
+    "source": "caiso_lmp",
+    "interval_start_utc": "2026-04-18T19:00:00-00:00",
+    "node": "PALOVRDE_ASR-APND",
+    "lmp_component": "MCL",
+    "price_usd_per_mwh": "0.18171"
+  },
+  {
+    "source": "caiso_lmp",
+    "interval_start_utc": "2026-04-18T19:05:00-00:00",
+    "node": "PALOVRDE_ASR-APND",
+    "lmp_component": "MCL",
+    "price_usd_per_mwh": "0.18346"
+  }
+]
