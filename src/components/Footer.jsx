@@ -1,10 +1,3 @@
-const PLATFORM_LINKS = [
-  { href: '#scoring', label: 'Scoring Engine' },
-  { href: '#workflow', label: 'Pipeline' },
-  { href: '#data', label: 'Data Sources' },
-  { href: '#markets', label: 'Markets' },
-]
-
 const DATA_LINKS = [
   { label: 'EIA-930 BA' },
   { label: 'CAISO OASIS' },
@@ -13,10 +6,14 @@ const DATA_LINKS = [
 ]
 
 const DEV_LINKS = [
-  { label: 'GitHub Repo' },
-  { label: 'Schema Reference' },
-  { label: 'DuckDB Catalog' },
-  { label: 'API Docs' },
+  {
+    label: 'GitHub Repo',
+    href: 'https://github.com/BhavyaShah1234/EnergyHackathon',
+    external: true,
+  },
+  { label: 'Schema Reference', href: '#' },
+  { label: 'DuckDB Catalog', href: '#' },
+  { label: 'API Docs', href: '#' },
 ]
 
 const BADGES = ['ERCOT', 'WECC', 'EIA', 'CAISO', 'NOAA']
@@ -37,15 +34,6 @@ export default function Footer() {
           </div>
 
           <div>
-            <div className="footer-col-title">Platform</div>
-            <ul className="footer-links">
-              {PLATFORM_LINKS.map(l => (
-                <li key={l.label}><a href={l.href}>{l.label}</a></li>
-              ))}
-            </ul>
-          </div>
-
-          <div>
             <div className="footer-col-title">Data</div>
             <ul className="footer-links">
               {DATA_LINKS.map(l => (
@@ -58,7 +46,14 @@ export default function Footer() {
             <div className="footer-col-title">Developers</div>
             <ul className="footer-links">
               {DEV_LINKS.map(l => (
-                <li key={l.label}><a href="#">{l.label}</a></li>
+                <li key={l.label}>
+                  <a
+                    href={l.href}
+                    {...(l.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+                  >
+                    {l.label}
+                  </a>
+                </li>
               ))}
             </ul>
           </div>

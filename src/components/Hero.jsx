@@ -41,8 +41,15 @@ export default function Hero() {
           From Permian Basin parcels to CAISO LMPs — scored in seconds.
         </p>
         <div className="hero-actions">
-          <a href="#scoring" className="btn-primary">Explore the Platform</a>
-          <a href="#data" className="btn-secondary">View Live Data →</a>
+          <a href="#dashboard" className="btn-primary">View dashboard</a>
+          <a
+            href="https://github.com/BhavyaShah1234/EnergyHackathon"
+            className="btn-secondary"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            View on GitHub →
+          </a>
         </div>
       </div>
     </section>

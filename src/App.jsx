@@ -7,11 +7,7 @@ import SiteMap from './components/SiteMap'
 import LiveTicker from './components/LiveTicker'
 import Scoring from './components/Scoring'
 import Workflow from './components/Workflow'
-import DataSources from './components/DataSources'
-import Markets from './components/Markets'
 import DataQuality from './components/DataQuality'
-import Testimonials from './components/Testimonials'
-import CTA from './components/CTA'
 import Footer from './components/Footer'
 import ScorecardPanel from './components/ScorecardPanel'
 import BottomStrip from './components/BottomStrip'
@@ -105,11 +101,7 @@ export default function App() {
       <LiveTicker />
       <Scoring />
       <Workflow />
-      <DataSources />
-      <Markets />
       <DataQuality />
-      <Testimonials />
-      <CTA />
       <Footer />
       {panelOpen && (
         <ScorecardPanel

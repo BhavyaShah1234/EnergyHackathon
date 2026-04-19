@@ -11,9 +11,14 @@ import { useSites, useMarket } from '../hooks/useApi'
 function DataSourceBadge({ source }) {
   const live = source === 'live'
   return (
-    <div className={`db-source-badge ${live ? 'db-source-badge--live' : 'db-source-badge--cached'}`}>
-      <span className={live ? 'pulse' : 'pulse pulse--amber'} />
-      {live ? 'LIVE DATA' : 'CACHED'}
+    <div
+      className={`db-live-prices-badge${live ? ' db-live-prices-badge--streaming' : ''}`}
+      role="status"
+      aria-label={live ? 'Prices from live API' : 'Demo price snapshot'}
+    >
+      <span className="db-live-prices-badge__globe" aria-hidden>🌍</span>
+      <span className="db-live-prices-badge__label">LIVE PRICES</span>
+      {live && <span className="db-live-prices-badge__dot" />}
     </div>
   )
 }
@@ -146,8 +151,8 @@ export default function Dashboard() {
             <DataSourceBadge source={isLive ? 'live' : 'cached'} />
             <span className="db-header-note">
               {isLive
-                ? 'Scores computed from live EIA + CAISO feeds'
-                : 'Backend offline — showing cached data · run npm run dev:api in another terminal'}
+                ? 'Streaming from live EIA + CAISO feeds'
+                : 'Demo snapshot on this page · run npm run dev:api in another terminal for API-backed live feeds'}
             </span>
           </div>
         </div>
@@ -266,7 +271,7 @@ export default function Dashboard() {
               <tr>
                 <th>#</th><th>Site</th><th>State</th><th>Composite</th>
                 <th>Sub-A Land</th><th>Sub-B Gas</th><th>Sub-C Power</th>
-                <th>Gas $/MMBtu</th><th>Est. $/MWh</th><th>Acres</th><th>Land Cost</th>
+                <th>Gas /MMBtu</th><th>Est. /MWh</th><th>Acres</th><th>Land $M</th>
               </tr>
             </thead>
             <tbody>

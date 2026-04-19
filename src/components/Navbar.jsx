@@ -10,20 +10,15 @@ export default function Navbar({ onAnalystToggle, analystOpen }) {
       <ul className="nav-links">
         <li><a href="#scoring">Scoring</a></li>
         <li><a href="#workflow">Workflow</a></li>
-        <li><a href="#data">Data</a></li>
-        <li><a href="#markets">Markets</a></li>
         <li><a href="#quality">Quality</a></li>
       </ul>
-      <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-        <button
-          className={`analyst-toggle-btn${analystOpen ? ' analyst-toggle-btn--active' : ''}`}
-          onClick={onAnalystToggle}
-          title="AI Analyst"
-        >
-          ⚡ AI Analyst
-        </button>
-        <a href="#cta" className="nav-cta">Request Access</a>
-      </div>
+      <button
+        className={`analyst-toggle-btn${analystOpen ? ' analyst-toggle-btn--active' : ''}`}
+        onClick={onAnalystToggle}
+        title="AI Analyst"
+      >
+        ⚡ AI Analyst
+      </button>
     </nav>
   )
 }

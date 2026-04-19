@@ -55,8 +55,8 @@ export default function DataQuality() {
       <div className="section-inner">
         <div className="section-header">
           <span className="section-eyebrow section-eyebrow--orange reveal">Data Quality</span>
-          <h2 className="section-title section-title--light reveal">Guaranteed Quality<br/>at Every Row.</h2>
-          <p className="section-sub section-sub--light reveal">
+          <h2 className="section-title section-title--dark reveal">Guaranteed Quality<br/>at Every Row.</h2>
+          <p className="section-sub section-sub--dark reveal">
             Eight hardened guarantees from raw API response to silver parquet.
             Your model trains on clean data or it doesn't train at all.
           </p>
