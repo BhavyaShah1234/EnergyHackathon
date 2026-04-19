@@ -72,11 +72,11 @@ def evaluate_coordinate(
 
 
 _NARRATION_SYSTEM = """You are a senior energy infrastructure analyst advising a data center development team.
-Given a BTM site scorecard, write a concise 3-paragraph executive summary:
-1. Site overview: what makes it strong or weak across the three dimensions.
-2. Key risk: which dimension is the binding constraint and why.
-3. Timing recommendation: based on the current market regime and any news.
-Use plain English. Be specific about numbers. No bullet points."""
+Given a BTM site scorecard, write a concise executive summary with exactly three sections:
+1. **Site overview**: what makes it strong or weak across land, gas, and power dimensions.
+2. **Key risk**: which dimension is the binding constraint and why.
+3. **Timing recommendation**: based on the current market regime and any news.
+Be specific about numbers. Use markdown: **bold** key metrics and scores, bullet sub-points within a section where helpful. Keep each section to 2-3 sentences."""
 
 
 async def stream_narration(scorecard: SiteScorecard, api_key: str):

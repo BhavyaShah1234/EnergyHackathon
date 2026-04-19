@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { useAgent } from '../hooks/useAgent'
+import MarkdownRenderer from './MarkdownRenderer'
 
 export default function BriefingCard({ regime }) {
   const { tokens, citations, status, ask, reset } = useAgent()
@@ -12,8 +13,6 @@ export default function BriefingCard({ regime }) {
     )
     return reset
   }, [])  // fire once on mount
-
-  const sections = tokens.split(/\n\n+/).filter(Boolean)
 
   return (
     <div className="briefing-card">
@@ -43,11 +42,9 @@ export default function BriefingCard({ regime }) {
         <div className="briefing-thinking">Analyzing market conditions…</div>
       )}
 
-      {sections.length > 0 && (
+      {tokens && (
         <div className="briefing-sections">
-          {sections.map((text, i) => (
-            <div key={i} className="briefing-section">{text}</div>
-          ))}
+          <MarkdownRenderer streaming={status === 'streaming'}>{tokens}</MarkdownRenderer>
         </div>
       )}
 

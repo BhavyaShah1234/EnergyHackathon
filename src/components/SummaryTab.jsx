@@ -1,3 +1,5 @@
+import MarkdownRenderer from './MarkdownRenderer'
+
 function ScoreBar({ label, value, color }) {
   return (
     <div className="score-bar-row">
@@ -100,7 +102,9 @@ export default function SummaryTab({ scorecard: sc, narrative, status, error }) 
       )}
 
       <div className="narrative-box">
-        {narrative || (status === 'streaming' ? '…' : '')}
+        {narrative
+          ? <MarkdownRenderer streaming={status === 'streaming'}>{narrative}</MarkdownRenderer>
+          : (status === 'streaming' ? '…' : '')}
       </div>
     </div>
   )

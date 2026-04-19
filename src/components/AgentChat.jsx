@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react'
 import { useAgent } from '../hooks/useAgent'
+import MarkdownRenderer from './MarkdownRenderer'
 
 function CitationChip({ text }) {
   const isCoord = /^-?\d+\.\d+,-?\d+\.\d+/.test(text)
@@ -11,7 +12,11 @@ function CitationChip({ text }) {
 function Message({ role, text, citations }) {
   return (
     <div className={`chat-message chat-message--${role}`}>
-      <div className="chat-bubble">{text}</div>
+      <div className="chat-bubble">
+        {role === 'assistant'
+          ? <MarkdownRenderer>{text}</MarkdownRenderer>
+          : text}
+      </div>
       {citations && citations.length > 0 && (
         <div className="chat-citations">
           {citations.map((c, i) => <CitationChip key={i} text={c} />)}
@@ -58,7 +63,9 @@ export default function AgentChat({ context }) {
         {(status === 'loading' || status === 'streaming') && (
           <div className="chat-message chat-message--assistant">
             <div className="chat-bubble">
-              {status === 'loading' ? <span className="chat-thinking">Thinking…</span> : tokens}
+              {status === 'loading'
+                ? <span className="chat-thinking">Thinking…</span>
+                : <MarkdownRenderer streaming>{tokens}</MarkdownRenderer>}
             </div>
             {citations.length > 0 && (
               <div className="chat-citations">

@@ -32,8 +32,8 @@ Reply only valid JSON, no markdown."""
 
 _SYNTHESIZE_SYSTEM = """You are a senior BTM data center investment analyst.
 You have access to live scoring data, market regime, LMP forecasts, and news.
-Write a concise, direct response (3-5 paragraphs max). Include specific numbers.
-Cite news headlines by title when you use them. No bullet points. No hedging."""
+Write a concise, direct response. Include specific numbers. Cite news headlines by title when you use them. No hedging.
+Format your response in markdown: **bold** key metrics and numbers; use bullet lists for multiple factors or comparisons; use ## headers to separate major sections when the response spans multiple topics; use tables when comparing two or more options side by side."""
 
 
 class AgentState(TypedDict):

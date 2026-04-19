@@ -1169,3 +1169,5 @@ footer {
 .node-selector:focus { outline: none; border-color: #E85D04; }
 .econ-loading { font-size: 10px; color: #9E9589; }
 .bs-fuel-mix b { color: #F5F0E8; }
+
+.md-content > :last-child { margin-bottom: 0; }
