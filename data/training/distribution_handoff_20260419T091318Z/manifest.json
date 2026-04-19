@@ -1,0 +1,84 @@
+{
+  "generated_at_utc": "2026-04-19T09:13:18.054551+00:00",
+  "output_dir": "/Users/suhasreddy/EnergyHackathon/data/training/distribution_handoff_20260419T091318Z",
+  "datasets": {
+    "blm_sma": {
+      "row_count": 129,
+      "csv": "blm_sma.csv",
+      "parquet": "blm_sma.parquet",
+      "error": null
+    },
+    "glo_upland_leases": {
+      "row_count": 1545,
+      "csv": "glo_upland_leases.csv",
+      "parquet": "glo_upland_leases.parquet",
+      "error": null
+    },
+    "glo_oilgas_active": {
+      "row_count": 7320,
+      "csv": "glo_oilgas_active.csv",
+      "parquet": "glo_oilgas_active.parquet",
+      "error": null
+    },
+    "glo_oilgas_inactive": {
+      "row_count": 12061,
+      "csv": "glo_oilgas_inactive.csv",
+      "parquet": "glo_oilgas_inactive.parquet",
+      "error": null
+    },
+    "nhd_waterbody": {
+      "row_count": 59106,
+      "csv": "nhd_waterbody.csv",
+      "parquet": "nhd_waterbody.parquet",
+      "error": null
+    },
+    "fema_floodplain": {
+      "row_count": 0,
+      "csv": null,
+      "parquet": null,
+      "error": "HTTPError: HTTP Error 500: "
+    },
+    "pipelines_infra": {
+      "row_count": 15958,
+      "csv": "pipelines_infra.csv",
+      "parquet": "pipelines_infra.parquet",
+      "error": null
+    },
+    "eia930": {
+      "row_count": 104459,
+      "csv": "eia930.csv",
+      "parquet": "eia930.parquet",
+      "error": null
+    },
+    "eia_ng_henry_hub": {
+      "row_count": 241,
+      "csv": "eia_ng_henry_hub.csv",
+      "parquet": "eia_ng_henry_hub.parquet",
+      "error": null
+    },
+    "caiso_lmp": {
+      "row_count": 103656,
+      "csv": "caiso_lmp.csv",
+      "parquet": "caiso_lmp.parquet",
+      "error": null
+    },
+    "ercot_dam_hub_prices": {
+      "row_count": 88536,
+      "csv": "ercot_dam_hub_prices.csv",
+      "parquet": "ercot_dam_hub_prices.parquet",
+      "error": null
+    },
+    "ercot_rtm_hub_prices": {
+      "row_count": 520800,
+      "csv": "ercot_rtm_hub_prices.csv",
+      "parquet": "ercot_rtm_hub_prices.parquet",
+      "error": null
+    }
+  },
+  "blocked_or_missing": {
+    "phmsa_incidents": "Official PHMSA bulk download returned HTTP 403 during automation.",
+    "phmsa_annual_reports": "Official PHMSA bulk download returned HTTP 403 during automation.",
+    "eia_176_757": "Official EIA query-system direct bulk path not wired yet.",
+    "waha_history": "Current EIA API series config does not return Waha spot history."
+  }
+}
