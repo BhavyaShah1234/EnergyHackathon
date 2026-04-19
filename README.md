@@ -5,6 +5,25 @@ Pulls grid, market, weather, gas, geospatial, and infrastructure data from the p
 
 **Pipeline-only** — models, dashboards, and scenario code live in sibling repos/branches.
 
+Current handoff package for downstream work:
+
+- data: [`data/training/distribution_handoff_20260419T091318Z/`](data/training/distribution_handoff_20260419T091318Z/)
+- guide: [`docs/distribution_handoff_guide.md`](docs/distribution_handoff_guide.md)
+- pull script: [`scripts/pull_distribution_handoff.py`](scripts/pull_distribution_handoff.py)
+
+For the current branch, treat these chart items as usable now:
+
+- `legal document`
+- `water body prox`
+- `distance to nearest pipeline`
+- `history grid prices`
+
+Still missing or partial:
+
+- `pipeline history` (incident / leak / operator-history side)
+- `history pipeline throughput`
+- `history fuel prices` is only partial because Waha is still missing
+
 ---
 
 ## Source Coverage

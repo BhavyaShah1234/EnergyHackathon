@@ -17,10 +17,10 @@ The model assumption for this branch is now:
 - `distance to nearest pipeline` = good enough
 - `history grid prices` = good enough
 
-The only chart items still treated as real gaps are:
+The only remaining model gaps are:
 
-- `history pipeline leakage reports`
-- `history operator reports`
+- `pipeline history`  
+  this means the missing PHMSA-style incident/leak/operator-history side
 - `history pipeline throughput`
 - the missing Waha side of `history fuel prices`
 
@@ -394,11 +394,11 @@ Model status:
 
 ## What Is Missing
 
-### `history pipeline leakage reports`
+### `pipeline history`
 
 Expected source:
 
-- PHMSA incident files
+- PHMSA incident files and PHMSA annual/operator files
 
 Status:
 
@@ -406,21 +406,12 @@ Status:
 
 Reason:
 
-- official published zip URL returned `403` during automation
+- official published PHMSA bulk paths returned `403` during automation
 
-### `history operator reports`
+What this means in plain English:
 
-Expected source:
-
-- PHMSA annual report data
-
-Status:
-
-- missing
-
-Reason:
-
-- official published bulk path returned `403` during automation
+- we have the pipeline map
+- we do **not** yet have the historical leak / failure / operator-condition side
 
 ### `history pipeline throughput`
 
@@ -465,8 +456,7 @@ If you are using this folder:
 
 Do **not** assume this folder already contains:
 
-- PHMSA leak history
-- PHMSA operator annual reports
+- PHMSA incident/operator history
 - EIA-176 / EIA-757 throughput history
 - Waha fuel-price history
 
@@ -477,6 +467,5 @@ The shortest possible status summary is:
 - `distance to nearest pipeline` = usable now
 - `history grid prices` = usable now
 - `history fuel prices` = partial only
-- `history pipeline leakage reports` = missing
-- `history operator reports` = missing
+- `pipeline history` = missing
 - `history pipeline throughput` = missing
