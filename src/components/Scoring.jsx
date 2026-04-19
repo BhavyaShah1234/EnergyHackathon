@@ -52,10 +52,6 @@ export default function Scoring() {
               <li>USGS NHD water body proximity</li>
               <li>Surface management agency code</li>
             </ul>
-            <div className="score-meter">
-              <div className="score-meter-label"><span>Confidence</span><span>92%</span></div>
-              <div className="score-bar"><div className="score-fill score-fill--a" data-width="92" /></div>
-            </div>
           </div>
 
           <div className="score-card score-card--b reveal" style={{ transitionDelay: '.1s' }}>
@@ -73,10 +69,6 @@ export default function Scoring() {
               <li>Curtailment history (EIA-176 / EIA-757)</li>
               <li>Compressor station proximity</li>
             </ul>
-            <div className="score-meter">
-              <div className="score-meter-label"><span>Confidence</span><span>78%</span></div>
-              <div className="score-bar"><div className="score-fill score-fill--b" data-width="78" /></div>
-            </div>
           </div>
 
           <div className="score-card score-card--c reveal" style={{ transitionDelay: '.2s' }}>
@@ -94,10 +86,6 @@ export default function Scoring() {
               <li>NOAA 72-hr load forecasting inputs</li>
               <li>EIA-930 15-min BA demand &amp; net gen</li>
             </ul>
-            <div className="score-meter">
-              <div className="score-meter-label"><span>Confidence</span><span>85%</span></div>
-              <div className="score-bar"><div className="score-fill score-fill--c" data-width="85" /></div>
-            </div>
           </div>
         </div>
       </div>

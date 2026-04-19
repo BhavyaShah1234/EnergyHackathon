@@ -14,8 +14,7 @@ const DEV_LINKS = [
     external: true,
   },
   { label: 'Schema Reference', to: '/docs/schema' },
-  { label: 'API Docs', to: '/docs/schema' },
-  { label: 'DuckDB Catalog', to: '/docs/data' },
+  { label: 'References', to: '/docs/schema' },
 ]
 
 const BADGES = ['ERCOT', 'WECC', 'EIA', 'CAISO', 'NOAA']

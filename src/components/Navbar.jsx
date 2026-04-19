@@ -11,8 +11,6 @@ export default function Navbar({ onAnalystToggle = () => {}, analystOpen = false
       </Link>
       <ul className="nav-links">
         <li><a href="#scoring">Scoring</a></li>
-        <li><a href="#workflow">Workflow</a></li>
-        <li><a href="#quality">Quality</a></li>
         <li><Link to="/docs/overview">Docs</Link></li>
       </ul>
       <button

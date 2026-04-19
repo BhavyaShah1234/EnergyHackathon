@@ -277,7 +277,7 @@ section { padding: 100px 24px; }
 @media (max-width: 900px) { .scoring-grid { grid-template-columns: 1fr; } }
 .score-card {
   background: #fff; border-radius: 16px;
-  padding: 40px 36px; position: relative; overflow: hidden;
+  padding: 28px 28px; position: relative; overflow: hidden;
   border: 1px solid var(--parchment-border);
   box-shadow: 0 4px 24px rgba(0,0,0,0.06);
   transition: transform 0.3s cubic-bezier(.22,1,.36,1), box-shadow 0.3s;

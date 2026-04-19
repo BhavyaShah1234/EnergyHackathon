@@ -6,8 +6,6 @@ import Dashboard from './components/Dashboard'
 import SiteMap from './components/SiteMap'
 import LiveTicker from './components/LiveTicker'
 import Scoring from './components/Scoring'
-import Workflow from './components/Workflow'
-import DataQuality from './components/DataQuality'
 import Footer from './components/Footer'
 import ScorecardPanel from './components/ScorecardPanel'
 import BottomStrip from './components/BottomStrip'
@@ -121,8 +119,6 @@ export default function App() {
       <BottomStrip />
       <LiveTicker />
       <Scoring />
-      <Workflow />
-      <DataQuality />
       <Footer />
       {panelOpen && (
         <ScorecardPanel
