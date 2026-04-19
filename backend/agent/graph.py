@@ -27,6 +27,9 @@ Examples:
 - "Compare my pins" or "compare these pins" → compare
 - "Should I build now or wait?" → timing
 - "Why is the land score low?" → explanation
+- "Give me a current market briefing" → timing
+- "What is the current regime state?" → timing
+- "What is the strongest siting opportunity right now?" → timing
 - "Find 5 sites with gas under $2/MMBtu" → config
 - "Set min composite to 0.8 and max sites to 2" → config
 - "Only show ERCOT sites with weights 40/30/30" → config
@@ -36,6 +39,7 @@ Reply only valid JSON, no markdown."""
 _SYNTHESIZE_SYSTEM = """You are a senior BTM data center investment analyst.
 You have access to live scoring data, market regime, LMP forecasts, and news.
 Write a concise, direct response. Include specific numbers. Cite news headlines by title when you use them. No hedging.
+IMPORTANT: Always answer from the data provided. Never refuse or ask the user to provide coordinates, pins, or a scorecard before answering — if site data is present use it, if not use regime/forecast/news data to give the best market-level answer you can.
 Format your response in markdown: **bold** key metrics and numbers; use bullet lists for multiple factors or comparisons; use ## headers to separate major sections when the response spans multiple topics; use tables when comparing two or more options side by side."""
 
 _CONFIG_EXTRACT_SYSTEM = """Extract optimization configuration changes from the user's request.
@@ -184,6 +188,22 @@ def timing_node(state: AgentState) -> dict:
             citations.append(f"HB_WEST 72h P50 avg: ${sum(fc['p50'])/len(fc['p50']):.1f}/MWh")
     except Exception:
         pass
+
+    ctx = state.get('context', {})
+    if not ctx.get('scorecard'):
+        try:
+            from backend.data.sites import CANDIDATE_SITES
+            top_coords = [{'lat': s.lat, 'lon': s.lng} for s in CANDIDATE_SITES[:5]]
+            ranked = compare_sites.invoke({'coords': top_coords})
+            if ranked:
+                best = ranked[0]
+                results.append({'top_candidate': best})
+                citations.append(
+                    f"Top site: ({best['lat']:.3f},{best['lon']:.3f}) "
+                    f"composite={best['composite']:.3f} spread=${best.get('spread_p50_mwh', 0):.1f}/MWh"
+                )
+        except Exception:
+            pass
 
     if state.get('needs_web_search'):
         try:

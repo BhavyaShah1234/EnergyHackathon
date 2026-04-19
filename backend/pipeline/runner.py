@@ -36,9 +36,16 @@ def _write_silver(name: str, records: list[dict]) -> Path:
     df   = pd.DataFrame(records)
     dest = SILVER_DIR / name
     dest.mkdir(parents=True, exist_ok=True)
-    path = dest / f"{datetime.now(timezone.utc).strftime('%Y%m%d')}.parquet"
-    df.to_parquet(path, index=False)
-    return path
+    stamp = datetime.now(timezone.utc).strftime('%Y%m%d')
+    parquet_path = dest / f"{stamp}.parquet"
+    try:
+        df.to_parquet(parquet_path, index=False)
+        return parquet_path
+    except Exception as exc:
+        logger.warning("Parquet write unavailable; falling back to CSV (%s)", exc)
+        csv_path = dest / f"{stamp}.csv"
+        df.to_csv(csv_path, index=False)
+        return csv_path
 
 
 async def run_pipeline(api_key: str = "DEMO_KEY") -> dict:

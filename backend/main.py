@@ -1,6 +1,9 @@
 """COLLIDE Platform — FastAPI scoring engine."""
 import asyncio
 import json
+import sys
+import types
+from pathlib import Path
 from typing import Any
 
 from fastapi import FastAPI, HTTPException, WebSocket, WebSocketDisconnect
@@ -8,6 +11,14 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from sse_starlette.sse import EventSourceResponse
+
+# Vercel can materialize Python entrypoints either as a package module
+# (backend/main.py) or as a flat file (/var/task/main.py). Registering a
+# lightweight "backend" package alias keeps absolute imports working in both.
+if "backend" not in sys.modules:
+    backend_pkg = types.ModuleType("backend")
+    backend_pkg.__path__ = [str(Path(__file__).resolve().parent)]
+    sys.modules["backend"] = backend_pkg
 
 from backend.config import get_settings
 from backend.data.sites import CANDIDATE_SITES
