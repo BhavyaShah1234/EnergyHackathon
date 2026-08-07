@@ -34,7 +34,7 @@ Pulls grid, market, weather, gas, geospatial, and infrastructure data from the p
 | Source | Reason |
 |---|---|
 | ERCOT MIS (LMP, DAM, fuel-mix, outages) | Pending developer token from [mis.ercot.com](https://mis.ercot.com) |
-| PHMSA Annual Report + Incident DB | `phmsa.dot.gov` bulk files are Akamai-blocked to automated clients; use manual upload into `data/raw/phmsa/` until a mirrored source exists |
+| PHMSA Annual Report + Incident DB | Bulk-downloaded manually from `phmsa.dot.gov` and loaded into `data/raw/phmsa/` — Akamai blocks automated clients so live ingestion is not available |
 | EIA-176 / EIA-757 | Static bulk; not yet loaded |
 | Pecan Street, NREL SMART-DS / NSRDB / EVI-Pro | Static; not yet loaded |
 
